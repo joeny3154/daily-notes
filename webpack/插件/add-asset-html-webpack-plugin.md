@@ -1,0 +1,1 @@
+https://github.com/SimenB/add-asset-html-webpack-plugin/blob/master/README.md

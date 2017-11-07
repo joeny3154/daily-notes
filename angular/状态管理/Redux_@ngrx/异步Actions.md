@@ -1,0 +1,1 @@
+https://zhangchen915.gitbooks.io/angular2-training/content/content/state-management/modifying_your_application_state_by_dispatching_actions.html

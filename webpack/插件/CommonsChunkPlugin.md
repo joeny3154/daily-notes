@@ -1,0 +1,3 @@
+webpack的CommonsChunkPlugin插件，官网提供了抽取vendor的解决思路，其中manifest的作用防止再次构建是改变vendor的hash，导致无法利用浏览器的缓存。同时，我们还需要抽取不同入口的common部分，所以综上，理想的webpack配置如下：
+
+
