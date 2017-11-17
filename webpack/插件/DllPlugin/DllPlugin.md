@@ -8,8 +8,6 @@ https://segmentfault.com/a/1190000006087638
 如上打包dll包完毕之后，会生成vendor-manifest.json和vendor.dll.js文件。vendor.dll.js就是我们的dll包。vendor-manifest.json是库文件的node_modle路径和webpack打包id的映射，内容如下：
 
 
-
-
 ### 编译Dll文件
 如何编译Dll文件？
 编译Dll文件的代码实际上跟编译业务代码是一样的，记得利用--config指定上述专供Dll使用的webpack配置文件就好了：
