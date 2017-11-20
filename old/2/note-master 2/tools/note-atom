@@ -1,0 +1,31 @@
+# atom 编辑器使用
+================
+
+# 教程网址：
+http://wiki.jikexueyuan.com/project/atom/basis.html
+
+# 包：
+bash:
+		apm install xxx --save-dev
+
+# xxx:
+
++ project-viewer :	项目可视化
++ language-vue	： vue语法高亮
++ language-ejs	:	ejs语法高亮
++ merge-conflicts ： 
++ git-plus : 
++ file-icons : 文件图标
+
++ https://atom.io/packages/autocomplete-plus 自动补全
++ https://atom.io/packages/file-icons 显示不同的icon（方便分辨，如果已经安装了sei，则不需要了）
++ https://atom.io/packages/minimap 类似ST3右上角的代码地图
++ https://atom.io/packages/project-manager 项目管理（每次打开Atom，都需要重新选择路径，此插件可以解决这个问题）
++ https://atom.io/packages/highlight-selected 高亮选中的内容
++ https://atom.io/packages/minimap-highlight-selected 高亮mini map中相应的内容
++ https://atom.io/packages/highlight-line 高亮当前所在行
++ https://atom.io/packages/autosave 当失去焦点后，自动保存
++ https://atom.io/packages/space-tab Tab与空格之间的转换
+
+# 包推荐
+http://blog.wangjunfeng.com/archives/647

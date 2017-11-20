@@ -113,3 +113,13 @@ m1 // ["abc", "a", "c", index: 0, input: "abcabv"]
 var m2 = 'abcabv'.match(/(.)b(.)/g);
 m2 // ["abc", "abv"]
 ```
+
+# replace
+
+搜索模式如果不加`g`修饰符，就替换第一个匹配成功的值，否则替换所有匹配成功的值。
+
+```
+'aaa'.replace('a', 'b') // "baa"
+'aaa'.replace(/a/, 'b') // "baa"
+'aaa'.replace(/a/g, 'b') // "bbb"
+```

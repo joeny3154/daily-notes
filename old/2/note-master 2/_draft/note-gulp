@@ -1,0 +1,66 @@
+官网：
+	gulpjs.com
+
+Gulp介绍:
+	流式构建工具
+	底层框架构建工具，
+	流式管道概念：即出又进，io，i变成o，o也是i
+
+	缺点：
+		1.插件较少
+
+		2.基于流式的插件开发，如果网上的插件不能满足你项目的要求，需要自己去开发一些基于流式的编译工具和插件，如果对于nodejs的流不是很熟悉，开发会变得困难
+
+	还有一个底层构建工具npm：npm相当于原始的构建工具，也可以进行构建
+
+	构建大致分为两个方面：
+		1.前端构建
+		2.能集成到php，nodejs等，不需要前端require分析依赖，能自动进行分析依赖于后端进行配合
+
+Gulp的安装：
+	进入官网gulpjs.com->Try it now->依托到githup上
+	
+	全局安装：
+		npm install --global gulp 		
+	项目中：
+		npm install --save-dev gulp 	依赖到项目中去
+
+	$ gulp 
+		提示：No gulpfile found
+	$ npm init 
+		package.json
+		
+	根目录创建一个文件：gulpfile.js:
+
+	$gulp
+		提示： Task 'default' is not in your gulpfile
+
+	gulpfile.js中创建 default配置
+		内容：
+			var gulp=require('gulp');
+			gulp.task('default',function(){
+
+			})
+
+Gulp的应用：
+	插件：官网(gulpjs.com)->Plugins(插件)
+
+	gulpfile.js配置：
+		var gulp=require('gulp');
+		var uglify=require('gulp-uglify');
+		var concat=require('gulp-concat');
+
+		var paths={
+			scripts:['js/index.js','js/main.js'],
+		}
+
+		gulp.task('default',function(){
+			gulp.src('js/*.js')//gulp.src(paths)
+				.pipe(uglify())//上一个的输出是下一个的输入
+				.pipe(concat('all.min.js'))
+				.pipe(gulp.dest('build'));
+		});
+		
+	gulp插件安装：
+		'gulp-uglify':$ npm install gulp-uglify --save-dev
+		'gulp-concat':$ npm install gulp-concat --save-dev

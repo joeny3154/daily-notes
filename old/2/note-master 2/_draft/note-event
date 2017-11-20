@@ -1,0 +1,63 @@
+Event对象
+
+1.EventTarget接口
+	1.1 addEventListener()
+	1.2 removeEventListener()
+	1.3 dispatchEvent()
+
+2.监听函数
+	2.1 HTML标签的on-属性
+	2.2 Element节点的事件属性
+	2.3 addEventListener方法
+	2.4 this对象的指向
+
+3.事件的传播
+	3.1 传播的三个阶段
+	3.2 事件的代理
+
+4.Event对象
+	4.1 bubbles，eventPhase
+	4.2 cancelable，defaultPrevented
+	4.3 currentTarget，target
+	4.4 type，detail，timeStamp，isTrusted
+	4.5 preventDefault()
+	4.6 stopPropagation()
+	4.7 stopImmediatePropagation()
+5.鼠标事件
+	5.1 事件种类
+	5.2 MouseEvent对象
+	5.3 altKey，ctrlKey，metaKey，shiftKey
+	5.4 button，buttons
+	5.5 clientX，clientY，movementX，movementY，screenX，screenY
+	5.6 relatedTarget
+	5.7 wheel事件
+6.键盘事件
+	6.1 altKey，ctrlKey，metaKey，shiftKey
+	6.2 key，charCode
+7.进度事件
+8.拖拉事件
+	8.1 事件种类
+	8.2 DataTransfer对象概述
+	8.3 DataTransfer对象的属性
+	8.4 DataTransfer对象的方法
+9.触摸事件
+	9.1 Touch对象
+	9.2 TouchList对象
+	9.3 TouchEvent对象
+	9.4 触摸事件的种类
+10.表单事件
+	10.1 nput事件，select事件，change事件
+	10.2 reset事件，submit事件
+
+11. 文档事件
+	11.1 beforeunload事件，unload事件，load事件，error事件，pageshow事件，pagehide事件
+	11.2 DOMContentLoaded事件，readystatechange事件
+	11.3 scroll事件，resize事件
+	11.4 hashchange事件，popstate事件
+	11.5 cut事件，copy事件，paste事件
+	11.6 焦点事件
+12.自定义事件和事件模拟
+	12.1 CustomEvent()
+	12.2 事件的模拟
+	12.3 自定义事件的老式写法
+	12.4 事件模拟的老式写法

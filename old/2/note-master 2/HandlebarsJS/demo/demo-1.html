@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div[class^="w_"] {
+            background: pink;
+            width: 100%;
+            min-height: 100px;
+        }
+    </style>
+    <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js">
+    </script>
+    <script type="text/javascript" src="../bower_components/handlebars/handlebars.js">
+    </script>
+    <script id="tpl_1" type="text/x-handlebars-template">
+        <ul>
+            {{#each name}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    </script>
+    <script id="tpl_2" type="text/x-handlebars-template">
+        {{#if list}}
+        <ul id="list">
+            {{#each list}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+        {{else}}
+        <p>{{error}}</p>
+        {{/if}}
+    </script>
+    <script id="tpl_3" type="text/x-handlebars-template">
+        {{#unless data}}
+        <ul id="list">
+            {{#each list}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+        {{else}}
+        <p>{{error}}</p>
+        {{/unless}}
+    </script>
+    <script id="tpl_4" type="text/x-handlebars-template">
+        <div class="entry">
+            <h1>{{title}}</h1> {{#with author}}
+            <h2>{{firstName}}</h2>
+            <h2>{{lastName}}</h2> {{/with}}
+        </div>
+    </script>
+    <script id="tpl_5" type="text/x-handlebars-template">
+        <div class="entry">
+            {{! handlebars comments }}
+        </div>
+    </script>
+    <script id="tpl_6" type="text/x-handlebars-template">
+        {{#with person}}
+        <h1>{{../company.name}}</h1> {{/with}}
+    </script>
+    <script id="tpl_7_1" type="text/x-handlebars-template">
+        {{#if_even num}} {{this.num}}是偶数 {{/if_even}}
+    </script>
+    <script id="tpl_7_2" type="text/x-handlebars-template">
+        {{#compare people.name '==' 'peter'}}
+            他是peter,并且他{{people.age}}了！
+            {{else}}
+            他的名字不是peter！
+        {{/compare}}
+    </script>
+    <script id="tpl_8" type="text/x-handlebars-template">
+        <p>转义：{{html}}</p>
+        <p>不转义：{{{html}}}</p>
+    </script>
+    <script id="tpl_9" type="text/x-handlebars-template">
+        我的英文名叫{{name}}！
+    </script>
+    <script id="tpl_10" type="text/x-handlebars-template">
+        <p>转义：{{html}}</p>
+        <p>不转义：{{{html}}}</p>
+    </script>
+</head>
+
+<body>
+    <h3>Block表达式 </h3>
+    <div class="w_0"></div>
+    <h3>each block helper </h3>
+    <div class="w_1"></div>
+    <h3>if else block helper</h3>
+    <div class="w_2"></div>
+    <h3>unless block helper</h3>
+    <div class="w_3"></div>
+    <h3>with block helper</h3>
+    <div class="w_4"></div>
+    <h3>Handlebar的注释（comments）</h3>
+    <div class="w_5"></div>
+    <h3>Handlebars的访问（Path）：可以通过.来访问属性也可以使用../,来访问父级属性</h3>
+    <div class="w_6"></div>
+    <h3>自定义helper：使用Handlebars.registerHelper()方法来注册一个helper http://www.cnblogs.com/lvdabao/p/handlebars_helper.html</h3>
+    <div class="w_7"></div>
+    <h3>简单的helper</h3>
+    <div class="w_7_1"></div>
+    <h3>块级helper</h3>
+    <div class="w_7_2"></div>
+    <h3>转义：{{{}}}</h3>
+    <div class="w_8"></div>
+    <h3>handlebars的jquery插件</h3>
+    <div class="w_9"></div>
+    <h3>调试技巧</h3>
+    <div class="w_10"></div>
+    <script>
+        var source_1 = $("#tpl_1").html();
+        var source_2 = $("#tpl_2").html();
+        var source_3 = $("#tpl_3").html();
+        var source_4 = $("#tpl_4").html();
+        var source_5 = $("#tpl_5").html();
+        var source_6 = $("#tpl_6").html();
+        var source_7_1 = $("#tpl_7_1").html();
+        var source_7_2 = $("#tpl_7_2").html();
+        var source_8 = $("#tpl_8").html();
+        var source_9 = $("#tpl_9").html();
+        var template_1 = Handlebars.compile(source_1);
+        var template_2 = Handlebars.compile(source_2);
+        var template_3 = Handlebars.compile(source_3);
+        var template_4 = Handlebars.compile(source_4);
+        var template_5 = Handlebars.compile(source_5);
+        var template_6 = Handlebars.compile(source_6);
+        var template_7_1 = Handlebars.compile(source_7_1);
+        var template_7_2 = Handlebars.compile(source_7_2);
+        var template_8 = Handlebars.compile(source_8);
+        //data
+        var context_1 = {
+            name: ["html", "css", "javascript"]
+        }
+        var context_2 = {
+            info: ['HTML5', 'CSS3', "WebGL"],
+            "error": "数据取出错误"
+        }
+        var context_3 = {
+            "data": false,
+            "list": ['HTML5', 'CSS3', "WebGL"],
+            "error": "数据取出错误"
+        }
+        var context_4 = {
+            title: "My first post!",
+            author: {
+                firstName: "Charles",
+                lastName: "Jolley"
+            }
+        }
+        var context_5 = {
+            title: "My first post!",
+            author: {
+                firstName: "Charles",
+                lastName: "Jolley"
+            }
+        }
+        var context_6 = {
+            "person": {
+                "name": "Alan"
+            },
+            company: {
+                "name": "Rad, Inc."
+            }
+        };
+        var context_7_1 = {
+            "num": 2
+        };
+        var context_7_2 = {
+            "people": {
+                name: "peter",
+                age : 29
+            }
+        };
+        var context_8 = {
+            "html": "<h1>这是一段html代码</h1>"
+        };
+
+        Handlebars.registerHelper("if_even", function(value, options) {
+            //options options是一个对象，包含上下文相关的一些信息，不过在简单helper中用不到，我们会下面在块级helper中详细说说。
+            console.log("value: " + value); //value: 2
+            console.log("this.num: " + this.num); // this.num: 2
+            console.log('fn(this): ' + options.fn(this)); // fn(this):             2是偶数
+            if ((value % 2) == 0) {
+                //options.fn(this): 你传入的上下文主体编译到模板，返回编译后的结果,这里我们传入this
+                return options.fn(this);
+            } else {
+                //options.inverse 取相反的意思，对应了我们模板中的{{else}}标签
+                return options.inverse(this);
+            }
+        });
+        Handlebars.registerHelper('compare', function(left, operator, right, options) {
+            if (arguments.length < 3) {
+                throw new Error('Handlerbars Helper "compare" needs 2 parameters');
+            }
+            var operators = {
+                '==': function(l, r) {
+                    return l == r;
+                },
+                '===': function(l, r) {
+                    return l === r;
+                },
+                '!=': function(l, r) {
+                    return l != r;
+                },
+                '!==': function(l, r) {
+                    return l !== r;
+                },
+                '<': function(l, r) {
+                    return l < r;
+                },
+                '>': function(l, r) {
+                    return l > r;
+                },
+                '<=': function(l, r) {
+                    return l <= r;
+                },
+                '>=': function(l, r) {
+                    return l >= r;
+                },
+                'typeof': function(l, r) {
+                    return typeof l == r;
+                }
+            };
+
+            if (!operators[operator]) {
+                throw new Error('Handlerbars Helper "compare" doesn\'t know the operator ' + operator);
+            }
+
+            var result = operators[operator](left, right);
+
+            if (result) {
+                return options.fn(this);
+            } else {
+                return options.inverse(this);
+            }
+        });
+        var html_1 = template_1(context_1);
+        var html_2 = template_2(context_2);
+        var html_3 = template_3(context_3);
+        var html_4 = template_4(context_4);
+        var html_5 = template_5(context_5);
+        var html_6 = template_6(context_6);
+        var html_7_1 = template_7_1(context_7_1);
+        var html_7_2 = template_7_2(context_7_2);
+        var html_8 = template_8(context_8);
+
+        //输入模板
+        $(".w_1").html(html_1);
+        $(".w_2").html(html_2);
+        $(".w_3").html(html_3);
+        $(".w_4").html(html_4);
+        $(".w_5").html(html_5);
+        $(".w_6").html(html_6);
+        $(".w_7_1").html(html_7_1);
+        $(".w_7_2").html(html_7_2);
+        $(".w_8").html(html_8);
+
+        //handlebars的jquery插件
+        (function($){
+            var compiled = {};
+            $.fn.handlebars = function(template,data){
+                if(template instanceof jQuery){
+                    template = $(template).html();
+                }
+                compiled[compiled] = Handlebars.compile(template);
+                var str = compiled[template](data);
+                this.html(str);
+            }
+        })(jQuery)
+        $(".w_9").handlebars($("#tpl_9"),{name:"rose"});
+    </script>
+</body>
+
+</html>

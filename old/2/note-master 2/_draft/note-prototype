@@ -1,0 +1,34 @@
+面向对象编程-prototype对象
+
+一、概述
+	1.构造函数的缺点
+		同一个构造函数的对象实例之间，无法共享属性。
+
+	2.prototype属性的作用
+
+	3.原型链
+		null除外，它没有自己的原型对象。
+
+二、instanceof运算符
+	var v=new Vehice();
+		v instanceof Vehice;
+		等同于
+		Vehicle.prototype.isPrototypeOf(v);
+
+三、Object.getPrototypeOf()
+	返回一个对象的原型。这是获取原型对象的标准方法。
+
+四、Object.setPrototypeOf()
+	可以为现有对象设置原型，返回一个新对象。
+
+五、Object.create()
+	var a={x:1};
+	var b=Object.setPrototypeOf({},a)
+
+六、Object.prototype.isPrototypeOf()
+	用来判断一个对象是否是另一个对象的原型。
+
+七、Object.prototype.__proto__
+	前后各两个下划线）可以改写某个对象的原型对象。
+
+八、获取原型对象方法的比较

@@ -1,0 +1,338 @@
+MySQL
+启动MySQL 服务
+net start mysql
+
+停止MySQL服务
+net stop mysql
+
+使用MySQL
+
+MySQL语句的规范
+	关键字与函数名称全部大写
+	数据库名称、表名称、字段名称全部小写
+	SQL语句必须以分号结尾
+	
+
+MySQL登陆
+	mysql 参数
+	-D,--database=name 		打开指定数据库
+	--deilmiter = name 		指定分隔符
+	-h, --host=name 		服务器名称
+	-p, --password[=name]	密码
+	-p, --port=#			端口号
+	--prompt=name 			设置提示符
+	-u, --user=name 		用户名
+	-V, --version 			输出版本信息并且退出
+
+	上下箭头可进行命令的翻阅
+
+删除数据库
+	DROP {DATABASE | SCHEMA} [IF EXISTS] db_name
+
+修改MySQL提示符
+	连接客户端时通过参数指定
+		shell>mysql -uroot -proot --prompt 提示符
+	连接上客户端后，通过prompt命令修改
+		mysql>prompt 提示符
+
+MySQL退出
+	mysql > exit;
+	mysql >	quit;
+	mysql > \q;
+
+修改数据库
+	ALTER {DATABASE | SCHEMA} [db_name] [DEFAULT] CHARACTER SET [=] charset_name
+
+
+
+MySQL提示符：
+	\D	完成的日期
+	\d 	当前数据库
+	\h	服务器名称
+	\u	当前用户
+
+查看当前服务器下的数据表列表
+	SHOW {DATABASES | SCHEMAS}
+	[LIKE 'pattern' | WHRER expr]
+
+MySQL常用命令
+	显示当前服务器版本	SELECT VERSION()
+	显示当前日期时间		SELECT NOW()
+	显示当前用户			SELECT USER()
+
+创建数据库
+	CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name
+	[DEFAULT] CHARACTER SET [=] charset_name
+	IF NOT EXISTS:忽略警告信息
+	SHOW WARNINGS:查看警告信息
+
+
+	第一阶段回顾：
+		MySQL默认端口号：3306
+		MySQL中的超级用户：root
+		创建数据库：	CREATE DATABASE
+		修改数据库：	ALTER DATABASE
+		删除数据库： DROP DATABASE
+
+数据类型：
+	整型：INT | BIGINT
+
+		年龄：
+	浮点型：
+		FLOAT[M,D]:单精度浮点，小数点后七位
+		DOUBLE[M,D]:双精度浮点
+
+		M：小数点前后总位数
+		D：小数点后的位数
+
+	日期时间型：
+		YEAR:
+		TIME:
+		DATA:
+		DATATIME:
+		TIMESTAMP:
+		日期时间类型时间开发中用的很少，一般采用数字类型来替代
+
+	字符型：
+		定长类型：会用空格来补齐
+		变长类型：是多少就是多少
+
+		CHAR(M)				char
+		VARCHAR(M)			varchar
+		TINYTEXT			tinytext
+		MEDIUMTEXT			mediumtext
+		LONGTEXT			longtext
+		ENUM('value1','value2',...)	enum
+		SET('value1','value2',...)	set
+
+
+数据优化：选择最合适的数据类型，而不是最大的
+
+数据表：（或者称之为表）是数据库最重要的组成部分之一，是其他对象的基础
+	二维数据表格，
+	二维就有行和列；	行称之为记录 列称之为字段
+
+	USE命令：
+		打开数据库
+			语法：USE 数据名称；
+
+		创建数据表：
+			CREATE TABLE [IF NOT EXISTS] table_name （
+				columu_name data_type
+			）
+			demo:
+				CREATE TABLE ta1(
+					username VARCHAR(20),
+					age TINYINT UNSGIGNED,
+					salary FLOAT(8,2) UNSIGNED
+				);
+
+		查看数据列表：
+			SHOW TABLES [FROM db_name]
+			[LIKE 'pattern' | WHERE expr]
+
+		查看数据表结构：
+			SHOW COLUMNS FROM ta1_name
+
+	记录的插入与查找
+			行：记录
+			INSERT
+		插入记录
+			INSERT[INTO] ta1_name [(col_name)] VALUES(val,...)
+			INSERT[INTO] tb1 (name,age) VALUES('tom',29)
+
+			SELECT
+		记录查找
+			SELECT expr,..FROM tb1_name
+
+		SELECT * FROM tb1 	*字段的过滤
+
+		空值与非空
+			NULL,字段值可以为空
+			NOT NULL,字段值禁止为空
+
+			username VARCHAR(20) NOT NULL,
+			age TINYINT UNSIGNED NULL
+
+		自动编号：
+			AUTO_INCREMENT
+			自动编号，且必须与主键组合使用
+			默认情况下，起始值为1，每次的增量为1
+
+	主键约束
+		PAIMARY KEY 			primary key
+		每张数据表只能存在一个主键
+		主键保证记录的唯一性
+		主键自动为NOT NULL
+
+
+	唯一约束
+		UNIQUE KEY 	unqiue key
+		唯一约束
+		唯一约束可以保证记录的唯一性
+		唯一约束的字段可以为控制（NULL）
+		每个数据表可以存在多个唯一约束
+
+	默认约束
+		DEFAULT
+		当插入记录时，如果没有明确为字段赋值，则自动赋予默认值
+
+总结：
+	数据类型：
+		字符型
+		整型
+		浮点型
+		日期时间型
+	数据表操作：
+		插入记录
+		查找记录
+	记录操作：
+		创建数据表
+		约束的使用
+
+回顾和概述：
+
+	数据类型：
+		字符型
+		整型
+		浮点型
+		日期时间型
+	数据表的操作：
+		如何创建数据表
+		PRIMARY KEY(主键约束)
+		UNIQUE KEY(唯一约束)
+		DEFAULT(默认约束)
+		NOT NULL(非空约束)
+		记录插入和查找
+
+外键约束
+	约束
+		1.约束保证数据的完整性和一致性
+		2.约束分为表级约束和列级约束
+			一个字段的约束是列级
+			两个或两个以上字段的约束是表级
+		3.约束类型包括：
+			NOT NULL(非空约束)
+			RPIMARY KEY(主键约束)
+			UNIQUE KEY(唯一约束)
+			DEFAULT(默认约束)
+			FOREIGN KEY(外键约束)
+
+		FOREIGN KEYp
+		保持数据一致性，完整性
+		实现一对一或者一对多关系
+			关系型数据库的根本原因
+
+		外键约束的要求
+			1.父表和子表必须使用相同的存储引擎，而且禁止使用临时表
+			2.数据表的存储引擎只能为InnoDB
+			3.外键列和参照列必须具有相似的数据类型。其中数字的长度或是
+				否有符号位必须相同；而字符的长度则可以不同。
+			4.外键列和参照列必须创建索引。如果外键列不存在索引的话，
+				MySQL将自动创建索引。
+	
+	编辑数据表的默认存储引擎
+		MYSQL配置文件
+			default-storage-engine=INNODB
+
+	外键约束的参照操作：
+		1.CASCADE:从父表删除或更新且自动删除或更新子表中匹配的行；
+		2.SET NULL：从父表删除或者更新行，并设置子表中的外键列为NULL。
+			如果使用该选项，必须保证子表列没有指定NOT NULL；
+		3.RESTRICT:拒绝对父表的删除或更新操作；
+		4.NO ACTION:标准SQL的关键字，在MySQL中与RESTRICT相同
+	实际开发中：很少使用物理外键约束，而使用逻辑外键约束（你去使用FOREIGN KEY去定义）
+
+	表级约束和列级约束：
+		对一个数据列建立的约束，称为列级约束（实际开发中使用较多）
+		对多个数据列建立的约束，称之为表级约束（很少使用）
+		立即约束既可以再列定义时声明，也可以再列定义后声明
+		表级约束之只能在列定义后声明
+
+		所有的约束当中，并不是所有的约束都存在表级和列级约束
+			主键，唯一，外键都可以存在表级和列级
+
+	修改数据表
+		添加单列
+			ALTER TABLE tb1_name ADD [COLMU] col_name 
+			columu_definition [FIRST |AFTER col_name]
+		添加多列
+			ALTER TABLE tb1_name ADD [COLUMU]
+			(col_name columu_definition,...)
+		删除列
+			ALTER TABLE tb1_name DROP [COLUMN] col_name
+
+		添加主键约束
+			ALTER TABLE tb1_name ADD [CONSTRAINT [symbol]]
+			PRIMARY KEY [index_type] (index_col_name,...)
+		添加唯一约束
+			ALTER TABLE tb1_name ADD [CONSTRAINT [symbol]]
+			UNIQUE [INDEX | KEY] [index_name] [index_type]
+			(index_col_name,...)
+		添加外键约束
+			ALTER TABLE tb1_name ADD [CONSTRAINT [symbol]]
+			FOREIGN KEY [index_name](index_col_name)
+			reference_definition
+		添加/删除默认约束
+			ALTER TABLE tb1_name ALTER [CONUMU] col_name
+			{SET DEFAULT litera | DROP DEFAULT}
+
+		删除主键约束
+			ALTER TABLE tb1_name DROP PRIMARY KEY
+		删除唯一约束
+			ALTER TABLE tb1_name DROP {INDEX|KEY} index_name
+		删除外键约束
+			ALTER TABLE tb1_name DROP FOREIGN KEY fk_symbol
+
+		修改列定义
+			ALTER TABLE tb1_name MODIFY [COLUMN] col_name
+			columu_definition [FIRST | AFTER col_name]
+		修改列名称
+			ALTER TABLE tb1_name CHANGE [COLUMN] old_col_name
+			new_col_name column_definition [FIRST|AFTER col_name]
+		修改数据表的名字
+			方法一
+			ALTER TABLE tb1_name RENAME [TO|AS] new_tb1_name
+			方法二
+			RENAME TABLE tb1_name TO new_tb1_name
+			[,tb1_name2 TO new_tb1_name2]...
+
+
+	本节知识点：
+		约束：
+			按功能划分为：
+				NOT NULL,		非空约束
+				PRIMARY KEY,	主键约束
+				UNIQUE KEY,		唯一约束
+				DEFAULT,		默认约束
+				FOREIGN KEY 	外键约束
+			按数据列的数目划分为：
+				表级约束，
+				列级约束
+
+		修改数据表：
+			针对字段的操作：添加/删除字段，修改列定义，修改列名称等
+			针对约束的操作：添加/删除各种约束
+			针对数据表的操作：数据表更名（两种方式）
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

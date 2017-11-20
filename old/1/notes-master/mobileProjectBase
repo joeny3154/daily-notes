@@ -1,0 +1,363 @@
+移动开发像素知识
+	
+	px:css pixels逻辑像素，浏览器使用的是抽象单位
+		可以根据不同的设备变大变小，所以叫抽象单位
+	dp,pt：device independent pixels 设备无关像素
+		物理像素
+	dpr:devicePixelRatio 设备像素缩放比
+		控制他们两者的关系
+
+	计算公式：1px = （dpr）*（dpr）*dp
+
+	为什么iphone5是320px*568px?
+		因为dpr=2
+		平面上：1px=2*2*dp
+		维度上：1px =2*dp
+		so:
+			640dp*1136dp=320px*568px
+
+	DPI:打印机每英寸可以喷的墨汁点（印刷行业）
+	PPI:屏幕每英寸的像素数量，即单位英寸内的像素密度
+
+	目前，在计算机显示设备参数描述上，二者意思表达的是一样的。
+
+	计算公式：以iphone为例
+		ppi=根号 (1136平方+640平方)/4=326ppi（视网膜Retina屏）
+
+	注意：单位为硬件像素，非px
+
+	PPI越高，像素数越高，图像越清晰
+	但可视度越低（小），系统默认设置缩放比例越大
+
+		 		ldpi		mdpi		hdpi		xhdpi
+	PPI 		120			160			240			320
+	默认缩放比	0.75		1.0			1.5			2.0
+
+	Retina屏（高清屏）：dpr都是大于等于2
+
+Viewport
+	一个pc页面在移动设备上展示效果是怎样的？
+	手机浏览器默认为我们做了两件事情：
+		1.页面渲染在一个980px（ios）的viewport
+		2.缩放
+
+	两个viewport:
+	visual viewport:度量viewport 可视窗口
+		=窗口缩放salce
+
+	layout viewport:布局viewport
+		注意：不是原页面的大小，如：ios默认viewport是980px
+
+	可以理解为手机屏幕分为两层：
+		底层是layout viewport
+		上层是visual viewport(物理屏幕大小，没有办法改变，只能通过缩放)
+
+	为什么不使用默认的980px的布局viewport?
+		宽度不可控制，不同系统不同设备的默认值都可能不同
+		页面缩小版显示，交互不友好
+		链接不可点
+		有缩放，缩放后又有滚动
+
+document.body.clientWidth
+	布局viewport
+window.innerWidth
+	度量viewport
+
+width=device-width:
+	时刻让布局viewport=设备宽度
+
+initial-scale=1:
+	布局viewport=度量viewport
+
+移动Web最佳viewport设置：
+	布局viewport=设备宽度=度量viewport
+
+<meta name="viewport" content="width=device-widht,initial-scale=1,user-scalabale=no">
+
+
+
+方案一：根据设备的实际宽度来设计（常用）
+	手机宽320px,我们就那320px来设计
+方案二：1px=1dp
+	缩放0.5.根据设备的物理像素dp等于抽象像素px来设计。
+	1像素边框和高清图片都不需要额外处理。
+
+pc：
+	固定布局（主导），流体布局
+
+高效移动布局：
+	响应式布局：responsive，高清图片，retina，px,em,rem-像素
+
+	Flex弹性盒子布局，高效居中方案，等比例填充列行，background-size,font-size,多行文本溢出
+
+Flex弹性盒子布局：
+	根据元素个数不同，自动填充容器
+
+	display:-webkit-flex:标示使用弹性布局，
+	flex:num 占容器的比例
+
+	Flex等比划分
+		子元素：
+			1.团购导航：Flex:1;则占容器1/(1+2)
+			2.放学导航：Flex:2;则占容器2/(1+2)
+
+	Flex混合划分(移动web的应用场景更为广泛)
+		子元素：
+			1.width:100px;（比如一张图片）
+			2.flex:2;
+			3.flex:1;
+
+	不定宽高的水平垂直居中：
+		.demo-wrapper{
+			position:absolute;
+			top:50%;
+			left:50%;
+			z-index:3;
+			-webkit-transform:translate(-50%;-50%;)
+			border-radius:6px;
+			background:#fff;
+		}
+
+		flexbox版：不定宽高的水平垂直居中
+			//父元素设置
+			.parent{
+				justify-content:center;//子元素水平居中
+				align-items:center;//子元素垂直居中
+				display:-webikt-flex;
+			}
+
+
+	兼容性：
+		ios可以使用最新的flex布局
+		android4.4以下，只能兼容旧版的flexbox布局
+		android4.4及以上，可以使用最新的flex布局
+
+		介于兼容性问题，建议使用旧版的flexbox方案。
+		例子中，属性替换如下：
+
+			新flex布局							旧flexbox布局
+			display:-webkit-flex;				display:-webkit-flex-box;
+			-webkit-flex:1;						-webkit-flex-box:1;
+		子元素横向布局：
+			justify-content:center;				box-pack:center;
+		子元素纵向布局：
+			align-items:center;					box-align:center;
+
+		效果是一样的，只是属性上不一样
+
+
+响应式设计：
+	移动rem布局之用js根据屏幕宽度动态计算html的font-size值
+	(function (doc, win) {
+	  var docEl = doc.documentElement,
+			  	//获取浏览器支持的改变方向的函数，如果'orientationchange'存在，就使用这个
+				//docEl.style.fontSize = 20 * (docEl.clientWidth / 320) + 'px';改变字体的尺寸
+	  resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+	  
+	  recalc = function () {
+	    var clientWidth = docEl.clientWidth;
+	    if (!clientWidth) return;
+	    docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+	  };
+	 
+	  if (!doc.addEventListener) return;
+	  win.addEventListener(resizeEvt, recalc, false);
+	  doc.addEventListener('DOMContentLoaded', recalc, false);
+	})(document, window);
+
+	媒体查询：
+		在media属性里：
+		screen 是媒体类型里的一种，CSS2.1定义了10种媒体类型
+		and 被称为关键字，其他关键字还包括 not(排除某种设备)，only(限定某种设备)
+		(min-width: 400px) 就是媒体特性，其被放置在一对圆括号中。
+		
+		代码实例：
+demo1:
+		@media screen and (max-width:1024px){
+			#page{width:95%}
+		}
+		@media screen and (max-width:1025px){
+			#page{width:80%}
+		}
+		@media screen and (max-width:720px){
+			#page{width:75%}
+		}
+
+demo2:
+		@media only screen and (min-width: 1024px){
+		    .content{
+		            width: 1000px;
+		            margin: auto
+		        }
+		}
+		@media only screen and (min-width: 400px) and (max-width: 1024px){
+		    .rightBox{
+		        width: 0;
+		    }
+		    .leftBox{ width: 30%}
+		    .middleBox{ width: 65%}
+		}
+		@media only screen and (max-width: 400px){
+		    .leftBox, .rightBox, .middleBox{ 
+		        width: 98%;
+		        height: 200px;
+		    }
+		}
+		媒体类型：
+			screen:屏幕
+			print:打印机
+			handheld:手持设备
+			all:通用
+		常用媒体查询参数：
+			width——视口宽度
+			height——视口宽高
+			device-width——设备的宽度
+			device-height——设备的高度
+			orientation:检查设备处于横向(landscape）还是竖屏（portrait）
+
+	设计点一：百分比布局（非固定布局）
+		仅仅使用媒体查询来使用不同的固定宽度设计，只会从一组css到另一组css的切换，
+		两种之间的没有任何平滑渐变，当没有命中媒体查询时，表现就会变得不可控制（滚动，换行）
+			比如我设计了一个iphone，也有ipad，突然出了一款ipad-mini，没有这款的媒体查询css
+	设计点二：弹性图片
+		img{
+			max-width:100%;
+			height:auto;
+		}
+	设计点三：重新布局，显示与隐藏
+		当页面达到手机屏幕宽度的时候，很多时候就要放弃一些传统的页面设计思想，
+		力求页面简单，简洁。所以我们必须要做出一下处理。（合理抛弃一些元素）
+		1.同比例缩减元素尺寸
+		2.调整页面结构布局
+		3.隐藏冗余的元素
+
+		经常需要切换改变位置的元素，最好使用【绝对定位】，减少重绘提高渲染性能。
+	
+	关于响应式设计的思考：
+		根据响应式设计的理念，一个页面包含所有设备不同屏幕的样式和图片，当一个移动设备访问
+		一个响应式页面，就会下载PC，笔记本，ipad等不同设备对应的样式。而这些样式却是冗余的，
+		完全没有用。
+
+	所以：
+		性能不是最优	<————	权衡利弊 	————> 减少重复开发
+
+
+移动web特别样式处理
+	高清图片：
+		在移动web页面上渲染图片，为了避免产生模糊，图片宽度应用物理像素单位渲染，即时100*100
+		的图片，应该使用100dp*100dp。
+
+	width:(w_value/dpr)px;
+	height:(h_value/dpr)px;
+
+	1像素边框：
+		同样是retina屏幕下的问题，根本原因：1px使用2dp渲染
+
+		border:0.5px 	仅仅ios8可以用，安卓不可用
+
+		比较成熟的解决方案：
+			sacleY(0.5)
+			demo：
+				li:before{
+					position:absolute;
+					top:-1px;
+					left:0;
+					content:"";
+					width:100%;
+					height:1px;
+					border-top:1px solid #ddd;
+					-webkit-transform:scaleY(0.5)
+				}
+
+相对单位 rem
+	为了适应各大屏幕的手机，px略显固定，不能根据尺寸的大小而改变，使用相对单位更能体验页面兼容性
+
+	em:是根据父节点的font-size为相对单位
+	rem:是根据html的font-size为相对单位
+
+	em在多层嵌套下，变得非常难以使用
+	rem更加能作为全局统一设置的度量
+
+	rem的基值设置多少好？
+		回归我们的目的：为了适应各大手机屏幕
+		rem=screen.width/20
+	demo：
+		//默认320px
+		html{font-size:32px;}
+
+		//iphone 6
+		@media(min-device-width:375px){
+			html{font-size:37.5px}
+		}
+
+		//iphone6 plus
+		@media(min-device-width:414px){
+			html{font-size:41.4px}
+		}
+
+	如iphone5上的rem基值为32px；渲染一张64*64px的div；则用2rem*2rem去渲染。
+	换算公式非常简单：
+		width：px/rem基值
+		height:px/rem基值
+
+	不使用rem的情况：font-size
+		一般来讲font-size是不应该使用rem等相对单位的。因为字体的大小是趋向于
+		阅读的实用性，并不适合与排版布局。
+
+		同理趋向于一些固定的元素的特征。我们不使用rem而改为px去确保在不同屏幕
+		表现一致（跟rem的目的相反）
+
+多行文本溢出：
+	单行文本溢出，对titile类的使用多，而多行文本类，在详情介绍则用的比较多
+
+	单行文本溢出
+		.inaline{
+			overflow:hidden;
+			white-space:nowrap;
+			text-overflow:ellipsis;
+			
+		}
+	多行文本溢出
+		.intwoline{
+			display:-webkit-box !important;
+			overflow:hidden;
+
+			text-overflow:ellipsis;
+			word-break:break-all;
+			
+			-webkit-box-orient:vertical;//方向
+			-webkit-line-clamp:2;//显示几行
+		}
+
+终端交互优化
+	在移动设备上没有了鼠标输入，hover等一些鼠标事件不再生效。取而代之的是更加人性话
+	的触摸事件（touch）。PC上的惯性思维，需要转换一下。
+
+		对click事件say no 
+		tap事件基础
+		touch触摸事件
+		弹性滚动
+		上拉刷新
+		下拉加载
+
+	300毫秒的故事
+		移动web页面上的click事件响应都要慢上300ms
+
+		移动设备访问的web页面都是pc上的页面。在默认的viewport(980px)的页面上往往需要
+		“双击”或者“捏开”放大页面来看清页面。而正是为了确认用户是“双击”还是“单击”。safari
+		需要个300ms的延迟来判断。而后面的iphone也一直援用这样的设计，而借鉴成功iphone的
+		android也沿用这样的设计。
+
+		于是“300ms的延迟”就成为了一道规范。
+
+	Tap基础事件
+		300ms延迟怎么破？
+
+		使用Tap事件代替click事件
+		自定义Tap事件的原理：
+
+移动框架库Zepto.js来使用Tap事件
+
+
+
+

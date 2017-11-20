@@ -1,0 +1,70 @@
+origin ++++ 
+cd d:
+$ mkdir [-p] dirName 建立名称为 dirName 的子目录。-p 确保目录名称存在，如果目录不存在的就新创建一个。
+$ pwd	查看当前路径
+$ ls	查看当前路径所有文件
+$ cat	stupid boss 2
+
+$ git add fileName
+$ git commit -m '...'
+211
+$ cat fileName 查看文件内容
+
+$ git log	显示从最近到最远的提交日志
+$ git reset --hard HEAD^ 返回
+$ git checkout -- readme.txt 可以丢弃工作区的修改
+$ git checkout dev 切换分支
+
+删除：
+	本地 $ rm a.txt
+	版本库：
+		1.也删除： git rm a.txt
+		2.误删，从版本库恢复到本地 git checkout -- a.txt
+
+$ git push -u origin master
+	git push命令，实际上是把当前分支master推送到远程
+	-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来
+$ git push origin master
+	本地作了提交后，通过此命令把本地master分支的最新修改推送至GitHub
+
+查看分支：				git branch
+创建分支：				git branch <name>
+切换分支：				git checkout <name>
+创建+切换分支：			git checkout -b <name> == $ git branch <name> + $ git checkout <name>
+合并某分支到当前分支：	git merge <name>
+删除分支：				git branch -d <name>
+
+命令可以看到分支合并图：	git log --graph （else参数：$ git log --graph --pretty=oneline --abbrev-commit）
+
+储藏	工作			git stash
+查看工作现场						git stash list
+
+恢复stash内容						git stash apply
+删除stash内容						git stash drop
+恢复并删除stash内容也					git stash pop
+强行删除分支				git branch -D feature-vulcan
+
+查看远程库的信息，用			git remote
+	用git remote -v显示更详细的信息：
+master分支推送到远程库对应的远程分支	$ git push origin master
+dev分支推送到远程库对应的远程分支		$ git push origin dev
+
+显示更详细的信息	git remote -v 	
+抓取远程的新提交	git pull		
+从本地推送分支	git push origin branch-name		
+建立本地分支和远程分支的关联	git branch --set-upstream branch-name origin/branch-name
+
+新建一个标签		git tag <name>，默认为HEAD，也可以指定一个commit id
+		$ git log --pretty=oneline --abbrev-commit 查看到commit id
+指定标签信息		git tag -a <tagname> -m "blablabla..."
+用PGP签名标签	git tag -s <tagname> -m "blablabla..."
+查看所有标签		git tag
+看到说明文字	git show <tagname>	$ git show v0.1
+
+推送一个本地标签				git push origin <tagname>
+推送全部未推送过的本地标签		git push origin --tags
+删除一个本地标签				git tag -d <tagname>
+删除一个远程标签				git push origin :refs/tags/<tagname>
+
+
+暂存区的修改撤销掉（unstage），重新放回工作区	git reset HEAD file

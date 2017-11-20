@@ -1,0 +1,273 @@
+
+JavaWeb简介
+	
+1.什么是Web应用程序
+2.静态页面与动态页面
+3.搭建Java Web开发环境
+4.手工编写第一个Web应用程序
+5.MyEclipse配置
+6.使用MyEclipse编写第一个Web应用程序
+7.修改Tomocat默认端口
+
+1.什么是Web应用程序
+	是一种通过Web访问的应用程序。联网+浏览器
+
+	软件开发领域的三大方向：
+		桌面应用程序：QQ
+		Web应用程序：京东，天猫
+		嵌入式应用程序：安卓，iphone
+
+
+Web应用程序：
+	JAVAEE方向需求一直很大，也是就业比较容易和稳定的
+
+静态和动态网页：
+	静态网页：
+		表现形式：网页中的内容是固定的，不会更新
+		所需技术：HTML，CSS
+	动态网页：
+		表现形式： 网页的内容通过程序动态显示的，自动更新。
+		所需技术：HTML，CSS，数据库技术，至少一门高级语言(java,C#,JavaScript,XML等)。
+				主流的动态网页脚本技术（Jsp/Asp.net/Php）
+
+工具：
+	JDK7.0
+	Tomcat7.0
+	MyEclipse1.0
+
+	Tomcat服务器简介：
+		Apcahe Jakarta的开源项目
+		JSP/Servalet容器
+
+		安装步骤：
+			安装
+			配置环境
+			测试首页
+				c盘Tomcat根目录 -> /bin ->startUp		双击打开不要关闭
+
+				lochost:8080能看到猫脸就正常
+
+		Tomcat服务器的目录结构：
+			/bin 		存放各个平台下用于启动和停止Tomcat的命令文件
+			/conf		存放Tomcat服务器的各种配置文件
+			/lib		存放Tomcat的日志文件
+			/logs		Tomcat运行时用于存放临时文件
+			/webapps	当发布Web应用时，默认会将Web应用的文件发布到于此目录中
+			/work		Tomcat把由JSP生成的Serlet放于此目录下
+
+
+
+第二章：
+====================================================================
+Jsp基本语法
+	JSP全名为Java Server Pages,其根本是一个简化的Servlet设计，他实现了Java当中使用HTML标签，JSP是一种动态网页技术标准，也是JAVAEE的标准。JSP与Servlet一样，是在服务器端执行的。
+
+常见动态网站开发技术对比：
+	JSP：		Java平台，安全性高，适合开发大型的，企业级的Web应用程序。
+	Asp.net：	Net平台，简单易学，但是安全性以及跨平台性差。
+	Php：		简单，高效，成本低开发周期短，特别适合中小型企业的Web应用开发（LAMP:Linu			x+Apache+MySQL+PHP）
+
+JSP基本语法
+===========
+	JSP页面元素构成：
+		静态内容：
+		指令：
+		表达式：
+		小脚本：
+		声明：
+		注释：
+
+	JSP指令：
+		page指令：		通常位于jsp页面的顶端，同一个页面可以有多个page指令。
+		include指令：	将一个外部文件嵌入到当前JSP文件中。同时解析这个页面中的JSP语句。
+		taglib指令：		使用标签库定义新的自定义标签，在JSP页面中启用定制行为。
+
+		page指令语法：
+			<%@ page 属性1="属性值" 属性2="属性值1，属性值2"...属性n="属性n" %>
+
+			属性 					描述							默认值
+			language	指定jsp页面使用的脚本语言					java
+			import		通过该属性来引用脚本语言中使用到的类文件	无
+			contentType	用来指定JSP页面所采用的编码方式			text/html,ISO-8859-1
+
+			demo:
+				<%@ language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+				<%@ language="java" import="java.util.*" contentType="text/html;charset=utf-8" %>
+
+		jsp注释：
+			HTML的注释：
+				<!--html注释--> //客户端可见，查看源代码可见
+			JSP注释：
+				<%-- html注释 --%>	//客户端不可见
+			JSP脚本注释：
+					//单行注释
+					/**/多行注释
+				<%
+					//单行注释
+					/*多行注释*/
+				%>
+
+		JSP基本语法
+			JSP脚本：
+				在JSP页面中执行的java代码
+				语法：
+					<% java代码 %> 
+				demo：
+					<% 
+						out.println("欢迎大家学习JAVAEE开发")
+					%>
+
+				JSP声明：
+					在JSP页面声明中定义变量或者方法。
+					
+					语法：
+						<%! java代码 %>可以定义变量，也可以定义方法
+
+						demo:
+						<%! 
+							String s="张三";
+
+							int add(int x,int y){
+								return x+y;
+							}
+						%>
+
+			JSP表达式：
+				在JSP页面中执行的表达式
+				语法：
+					<%=表达式 %>		//注意：表达式不以分号结束
+					
+					demo:
+						你好，<%=s %>		//输出：你好，张三
+						x+y=<%=add(10,5) %>	//输出：x+y=15
+
+			JSP页面的生命周期：
+
+				用户发出请求index.jsp
+
+
+
+
+
+JSP内置对象
+=====================================================================================
+	1.内置对象简介
+	2.四种作用域范围
+	3.out
+	4.request/response
+	5.session
+	6.application
+	7.其它内置对象
+	8.项目案例
+
+
+	内置对象简介：
+		JSP内置对象时Web容器创建的一组对象，不使用new关键字就可以使用的内置对象。
+
+		JSP九大内置对象：
+			常用：
+				out
+				request
+				respone
+				session
+				application
+
+			不常用
+				page 
+				pageContext 
+				exception 
+				config 
+
+
+	Web程序的请求和响应模式：
+		用户发送请求（request）
+
+		服务器给用户响应（response）
+
+	
+	什么是缓冲区
+			缓冲区：Buffer,所谓缓冲区就是内存的一块区域用来保存临时数据
+
+	out对象：
+		JspWriter类的实例，是像客户端输出内容常用的对象
+	常用方法如下：
+		1.void println()像客户端打印字符串
+
+	get和post区别
+		<form action="动作" name="" method="post/get">
+
+		</form>
+		get:
+			以明文的方式通过URL提交数据，数据在URL中可以看到。
+			提交的数据最多不超过2kb
+			安全性较低，但效率比post方式高。
+			适合提交数据量不大，安全性不高的数据。比如搜索，查询等功能
+
+		post：
+			将用户提交的信息封装在THML HEADER内。适合提交数据量大，安全性高
+			的用户信息。比如注册，修改，上传等功能！
+
+	request对象：
+		客户端的请求信息被封装在request对象中，通过它才能了解到客户的需求，然后做出响应。
+		它是HTTPServletRequest类的实例。request对象具有请求域，即完成客户端的请求之前，
+		该对象一直有效。常用方法如下：
+			String getParameter(String name);			返回name指定参数的参数值
+			String[] getParameterValues(String name);	返回包含参数name的所有值得数组
+			void setAttribute(Sring,Object);			存储此请求中的属性
+			object getAttribute(String,Object);			存储指定属性的属性值
+			String getContentType() 					得到请求体的MIME类型
+			String getProtocol() 						返回请求用的协议类型及版本号
+			String getServerNanme()						返回接受请求的服务器的主机名
+
+
+	
+
+	<form name="regForm" action="request.jsp" method="post">
+		用户名：<input type="text" name="username"/>
+		爱好：
+			<input type="checkbox" name="favorite" value="read">读书
+			<input type="checkbox" name="favorite" value="music">音乐
+			<input type="checkbox" name="favorite" value="movie">电影
+			<input type="checkbox" name="favorite" value="internet">上网
+
+			<input type="submit" value="提交"/>
+	</form>
+		<a hred="request.jsp?username=lisi">测试URL传参数</a>
+	<%
+		request.setCharacterEncoding("utf-8");		//解决中文乱码
+	%>
+	用户名：<%=request.getParameter("username")%>			//单选
+	爱好：<%													//多选
+			if(request.getParameterValues("favorite")!=null)
+			{
+				String[] favorites = request.getParameterValues("favorite");
+				for(int i=0;i<favorites.length;i++){
+					out.println(favorites[i]+"&nbsp;&nbsp;")
+				}
+			}
+		%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

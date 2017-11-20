@@ -1,0 +1,203 @@
+
+在Windows上安装Git
+	http://msysgit.github.io/下载，然后按默认选项安装即可
+
+	Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址
+		$ git config --global user.name "Your Name"
+		$ git config --global user.email "email@example.com"
+
+创建版本库
+	1.选择一个合适的地方，创建一个空目录：
+		$ mkdir learngit	$ mkdir -p learngit -p如果当前目录下没有learngit子目录创建learngit子目录
+		$ cd learngit
+		$ pwd
+		/Users/michael/learngit
+			pwd命令用于显示当前目录。
+	2.通过git init命令把这个目录变成Git可以管理的仓库：
+		$ git init
+		Initialized empty Git repository in /Users/michael/learngit/.git/
+
+把文件添加到版本库
+		编写文件，如readme.txt文件；放在learngit目录下（子目录也行）
+		1.用命令git add告诉Git，把文件添加到仓库：
+			$ git add readme.txt
+		2.第二步，用命令git commit告诉Git，把文件提交到仓库：
+			$ git commit -m "wrote a readme file"
+			[master (root-commit) cb926e7] wrote a readme file
+			 1 file changed, 2 insertions(+)
+			 create mode 100644 readme.txt
+
+			 简单解释一下git commit命令，-m后面输入的是本次提交的说明，可以输入任意内容，当然最好是有意义的，这样你就能从历史记录里方便地找到改动记录。
+
+			 git commit命令执行成功后会告诉你，1个文件被改动（我们新添加的readme.txt文件），插入了两行内容（readme.txt有两行内容）。
+
+			 为什么Git添加文件需要add，commit一共两步呢？因为commit可以一次提交很多文件，所以你可以多次add不同的文件，比如：
+				 $ git add file1.txt
+				 $ git add file2.txt file3.txt
+				 $ git commit -m "add 3 files."
+时光穿梭机：
+		git status命令可以让我们时刻掌握仓库当前的状态
+			$ git status
+		git diff命令查看：
+			$ git diff readme.txt 
+		确认后提交：
+			$ git commit -m "add distributed"
+			$ git add readme.txt
+
+	版本回退：
+		
+		小结：
+			HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset --hard commit_id。
+			穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
+			要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
+		详解：
+			历史记录：用git log命令查看：
+				如果嫌输出信息太多，看得眼花缭乱的，可以试试加上--pretty=oneline参数：
+				$ git log --pretty=oneline
+			回退到上一个版本：
+				用HEAD表示当前版本，也就是最新的提交
+				上一个版本就是HEAD^
+				上上一个版本就是HEAD^^
+				往上100个版本：写成HEAD~100。
+
+				$ git reset --hard HEAD^
+					--hard参数有啥意义？这个后面再讲，现在你先放心使用。
+
+			最新的那个版本append GPL已经看不到了：
+				只要上面的命令行窗口还没有被关掉，你就可以顺着往上找啊找啊，找到那个append GPL的commit id是3628164...，于是就可以指定回到未来的某个版本：
+					$ git reset --hard 3628164
+						版本号没必要写全，前几位就可以了，Git会自动去找。当然也不能只写前一两位，因为Git可能会找到多个版本号，就无法确定是哪一个了。
+
+		Git提供了一个命令git reflog用来记录你的每一次命令：
+			$ git reflog
+
+	工作区和暂存区：
+		小结：
+			暂存区是Git非常重要的概念，弄明白了暂存区，就弄明白了Git的很多操作到底干了什么。
+			没弄明白暂存区是怎么回事的童鞋，请向上滚动页面，再看一次
+	
+	管理修改：
+		小结：
+			理解了Git是如何跟踪修改的，每次修改，如果不add到暂存区，那就不会加入到commit中。
+	撤销修改：
+		小结：
+			场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。
+			场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD file，就回到了场景1，第二步按场景1操作。
+			场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。
+	删除文件:
+		小结：
+			命令git rm用于删除一个文件。如果一个文件已经被提交到版本库，那么你永远不用担心误删，但是要小心，你只能恢复文件到最新版本，你会丢失最近一次提交后你修改的内容。
+		详细：
+			新文件test.txt到Git并且提交后
+				可以在文件夹中手动删除，
+				也可以用rm命令删除： $ rm test.txt
+
+			Git知道你删除了文件，因此，工作区和版本库：
+				git status命令会告诉哪些文件被删除了！
+			现在可有两种选择：
+				1.确实要从版本库中删除该文件
+					用命令git rm删掉，并且git commit
+						$ git rm test.txt
+						$ git commit -m "remove test.txt"
+				2.删错了，从版本库里恢复到最新版本
+					$ git checkout -- test.txt
+					git checkout其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可“一键还原”
+远程仓库：
+	实际情况往往是这样，找一台电脑充当服务器的角色，每天24小时开机，其他每个人都从这个“服务器”仓库克隆一份到自己的电脑上，并且各自把各自的提交推送到服务器仓库里，也从服务器仓库中拉取别人的提交。
+
+	GitHub神奇的网站，这个网站就是提供Git仓库托管服务的，只要注册一个GitHub账号，就可以免费获得Git远程仓库。
+	1.创建SSH Key。
+
+	添加远程库
+		先有本地库，后有远程库的时候，如何关联远程库
+		小结
+		要关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git；
+		关联后，使用命令git push -u origin master第一次推送master分支的所有内容；
+		此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
+		分布式版本系统的最大好处之一是在本地工作完全不需要考虑远程库的存在，也就是有没有联网都可以正常工作，而SVN在没有联网的时候是拒绝干活的！当有网络的时候，再把本地提交推送一下就完成了同步，真是太方便了！
+
+
+	从远程库克隆：
+		假设我们从零开发，那么最好的方式是先创建远程库，然后，从远程库克隆。
+		小结：
+			要克隆一个仓库，首先必须知道仓库的地址，然后使用git clone命令克隆。
+			Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
+		
+		1.首先，登陆GitHub，创建一个新的仓库，名字叫gitskills：
+			勾选Initialize this repository with a README
+		2.用命令git clone克隆一个本地库：
+			$ git clone https://github.com/joeny3154/gitskills.git
+
+分支管理：
+	创建与和合并分支：
+		创建与合并分支
+
+		小结
+		Git鼓励大量使用分支：
+			查看分支：git branch
+			创建分支：git branch <name>
+			切换分支：git checkout <name>
+			创建+切换分支：git checkout -b <name>
+			合并某分支到当前分支：git merge <name>
+			删除分支：git branch -d <name>
+	解决冲突：
+		当Git无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
+		用git log --graph命令可以看到分支合并图。
+	分支管理策略：
+		在实际开发中，我们应该按照几个基本原则进行分支管理：
+		首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；
+		那在哪干活呢？干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；
+
+		你和你的小伙伴们每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并就可以了。
+		合并分支时，加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。
+
+	Bug分支:
+		修复bug时，我们会通过创建新的bug分支进行修复，然后合并，最后删除；
+
+		当手头工作没有完成时，先把工作现场git stash一下，然后去修复bug，修复后，再git stash pop，回到工作现场。
+	Feature分支：
+		开发一个新feature，最好新建一个分支；
+
+		如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。
+	多人协作：
+		查看远程库信息，使用git remote -v；
+		本地新建的分支如果不推送到远程，对其他人就是不可见的；
+		从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；
+		在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；
+		建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；
+		从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
+
+
+标签管理:
+	创建标签：
+		命令git tag <name>用于新建一个标签，默认为HEAD，也可以指定一个commit id；
+		git tag -a <tagname> -m "blablabla..."可以指定标签信息；
+		git tag -s <tagname> -m "blablabla..."可以用PGP签名标签；
+		命令git tag可以查看所有标签
+	操作标签：
+		命令git push origin <tagname>可以推送一个本地标签；
+		命令git push origin --tags可以推送全部未推送过的本地标签；
+		命令git tag -d <tagname>可以删除一个本地标签；
+		命令git push origin :refs/tags/<tagname>可以删除一个远程标签。
+
+使用GitHub：
+	
+
+自定义Git：
+	忽略特殊文件：
+		忽略某些文件时，需要编写.gitignore；
+			https://github.com/github/gitignore
+		.gitignore文件本身要放到版本库里，并且可以对.gitignore做版本管理！
+	配置别名
+		demo:
+		$ git config --global alias.co checkout
+		$ git config --global alias.ci commit
+		$ git config --global alias.br branch
+		--global参数是全局参数，也就是这些命令在这台电脑的所有Git仓库下都有用。
+			如果不加，那只针对当前的仓库起作用。
+	搭建git服务器
+
+期末总结：
+
+
+

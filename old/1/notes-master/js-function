@@ -1,0 +1,8 @@
+//
+$(function(){
+    //控制新闻简述不超出30个字
+    if($(".news_list_p").text().trim().length>30){
+         var str=$(".news_list_p").text().trim().substring(0,30)+"...";
+         $(".news_list_p").text(str);
+    }
+})

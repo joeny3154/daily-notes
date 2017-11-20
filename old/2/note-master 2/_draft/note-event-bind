@@ -1,0 +1,14 @@
+bind  unbind 使用场景
+什么情况下要解除绑定？
+
+1、为避免重复提交，可以在$.post或$.get后unbind，在收到返回后再重新绑定。
+当然也可以通过把button设置为disabled之类的方法来避免。
+
+2、在ajax可能改变某些参数，同时参数需要在bind时赋值的，在参数变动后需要unbind再重新bind
+
+3、如果某个Element的click行为是动态bind上去的，将有可能重复bind了两次的click，此时点击该element，两次绑定的方法都会执行。为避免这类错误，建议动态bind的方法中提前unbind。
+
+作者：许启辉
+链接：https://www.zhihu.com/question/29663841/answer/45195702
+来源：知乎
+著作权归作者所有，转载请联系作者获得授权。

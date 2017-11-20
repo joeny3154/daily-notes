@@ -1,0 +1,90 @@
+
+1.deferred对象就是jQuery的回调函数解决方案。在英语中，defer的意思是"延迟"，所以deferred对象的含义就是"延迟"到未来某个点再执行。
+
+2.ajax操作的链式写法
+	$.ajax()操作完成后;
+	如果使用的是低于1.5.0版本的jQuery，返回的是XHR对象，你没法进行链式操作；如果高于1.5.0版本，返回的是deferred对象，可以进行链式操作。
+
+	$.ajax("test.html")
+	　　.done(function(){ alert("哈哈，成功了！"); })
+	　　.fail(function(){ alert("出错啦！"); });
+	done()相当于success方法，fail()相当于error方法。采用链式写法以后，代码的可读性大大提高。
+
+3.指定同一操作的多个回调函数
+	$.ajax("test.html")
+	　　.done(function(){ alert("哈哈，成功了！");} )
+	　　.fail(function(){ alert("出错啦！"); } )
+	　　.done(function(){ alert("第二个回调函数！");} );
+
+4.为多个操作指定回调函数
+	$.when($.ajax("test1.html"), $.ajax("test2.html"))
+	　　.done(function(){ alert("哈哈，成功了！"); })
+	　　.fail(function(){ alert("出错啦！"); });
+
+	用到了一个新的方法$.when()
+	先执行两个操作$.ajax("test1.html")和$.ajax("test2.html")，如果都成功了，就运行done()指定的回调函数；如果有一个失败或都失败了，就执行fail()指定的回调函数
+
+5.$.when() $.when() 为多个操作指定回调函数。
+	$.when()的参数只能是deferred对象
+
+deferred
+
+deferred.resolve()方法和deferred.reject()方法
+	执行状态:未完成，已完成和已失败
+deferred.promise()方法。
+	它的作用是，在原来的deferred对象上返回另一个deferred对象，后者只开放与改变执行状态无关的方法（比如done()方法和fail()方法），屏蔽与改变执行状态有关的方法（比如resolve()方法和reject()方法），从而使得执行状态不能被改变。
+
+普通操作的回调函数接口（中）
+$.Deferred(wait)
+　　.done(function(){ alert("哈哈，成功了！"); })
+　　.fail(function(){ alert("出错啦！"); });
+	
+	$.Deferred()可以接受一个函数名（注意，是函数名）作为参数，$.Deferred()所生成的deferred对象将作为这个函数的默认参数。
+
+普通操作的回调函数接口（下）
+	var dtd = $.Deferred(); // 生成Deferred对象
+	　　var wait = function(dtd){
+	　　　　var tasks = function(){
+	　　　　　　alert("执行完毕！");
+	　　　　　　dtd.resolve(); // 改变Deferred对象的执行状态
+	　　　　};
+	　　　　setTimeout(tasks,5000);
+	　　};
+	　　dtd.promise(wait);
+	　　wait.done(function(){ alert("哈哈，成功了！"); })
+	　　.fail(function(){ alert("出错啦！"); });
+	　　wait(dtd);
+
+deferred.then()
+	有时为了省事，可以把done()和fail()合在一起写，这就是then()方法。
+	　　$.when($.ajax( "/main.php" ))
+	　　.then(successFunc, failureFunc );
+deferred.always()
+	不管调用的是deferred.resolve()还是deferred.reject()，最后总是执行。
+	$.ajax( "test.html" )
+	　　.always( function() { alert("已执行！");} );
+
+使用deferred对象写JS动画非常方便，例如：
+// Animation flows.
+$.when( preloadImage() )
+.then( animation01 )
+.then( animation02 )
+.then( animation03 )
+.then( transition )
+.then( merge )
+.then( zoom )
+.then( showContent )
+.then( flicker );
+优点：
+1、可以任意调整动画的先后顺序。
+2、添加 SKIP（跳过动画）功能也很方便。
+3、调试动画也可以节省大量时间。 把不需要调试的动画项注释掉。 例如:
+$.when( preloadImage() )
+// .then( animation01 )
+// .then( animation02 )
+// .then( animation03 )
+// .then( transition )
+// .then( merge )
+// .then( zoom )
+.then( showContent )
+.then( flicker );
