@@ -43,7 +43,7 @@ window.addEventListener('resize', function() {
 timer = setTimeout(resizeFontSize, 300);
 resizeFontSize();
 
-or 
+// 或者
 
 window.addEventListener(('orientationchange' in window ? 'orientationchange' : 'resize'), (function () {
     function c() {

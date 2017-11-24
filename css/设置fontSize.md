@@ -1,5 +1,8 @@
 
+假设设计图稿是 750px 像素
+
 ```
+
 var PAGE_MAX_WIDTH = 750, BASE_FONT_SIZE = 40;
 var DOC_ROOT_STYLE = document.documentElement.style;
 var timer = null;
