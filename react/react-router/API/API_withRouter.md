@@ -4,8 +4,7 @@ withRouter
 
 经 `withRouter` 高阶组件后你可以访问 `history` 对象的属性和最近`<Route>`的 `match`。
 
-`withRouter` 每当路线改变时都会重新渲染它的组件，`props`和 `<Route>`道具一样：`{ match, location, history }`。
-
+`withRouter` 每当路线改变时都会重新渲染它的组件，并获得和 `<Route>` 一样的`props`属性：`{ match, location, history }`。
 
 ```
 import { withRouter } from 'react-router'

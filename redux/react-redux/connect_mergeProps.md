@@ -1,0 +1,1 @@
+[mergeProps(stateProps, dispatchProps, ownProps): props] (Function)
