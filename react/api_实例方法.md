@@ -3,7 +3,7 @@ React 实例方法
 
 - `setState(updater, [callback: function])`
 
-setState() ***排队更改***组件的 state ，并通过更新 state 来告诉 React ，该组件及其子组件需要重新渲染。这是用于 响应事件处理程序 和 服务器响应 更新用户界面的主要方法。
+setState() **排队更改**组件的 state ，并通过更新 state 来告诉 React ，该组件及其子组件需要重新渲染。这是用于 响应事件处理程序 和 服务器响应 更新用户界面的主要方法。
 
 记住 setState() 作为一个请求，而不是立即命令来更新组件。为了更好的感知性能，React 可能会延迟它，然后合并多个setState()更新多个组件。 React不保证 state 更新就立即应用(重新渲染)。
 
@@ -31,7 +31,7 @@ updater 函数接收到的 prevState 和 props 保证都是最新的。updater �
 
 这将执行 stateChange 的浅合并到新的 state ，例如，调整购物车物品数量：`this.setState({quantity: 2})`
 
-这种形式的 ***setState() 也是异步的，并且在同一周期内的多个调用可以被合并在一起执行批处理。***例如，如果您尝试在同一周期内多次增加项目数量，这将导致的结果相当于：
+这种形式的 **setState() 也是异步的，并且在同一周期内的多个调用可以被合并在一起执行批处理。**例如，如果您尝试在同一周期内多次增加项目数量，这将导致的结果相当于：
 
 ```
 Object.assign(
@@ -54,7 +54,7 @@ this.setState((prevState) => {
 
 默认情况下，当组件的 state 或 props 改变时，组件将重新渲染。 如果你的 render() 方法依赖于一些其他数据，你可以告诉 React 组件需要通过调用 forceUpdate() 重新渲染。
 
-***调用 forceUpdate() 会导致组件跳过 shouldComponentUpdate() ，直接调用 render()。*** 
+**调用 forceUpdate() 会导致组件跳过 shouldComponentUpdate() ，直接调用 render()。** 
 这将触发子组件的正常生命周期方法，包括每个子组件的 shouldComponentUpdate() 方法。 如果标记（markup）更改，React 仍将更新 DOM 。
 
 通常你应该尽量避免使用 forceUpdate() ，并且 render() 中的 this.props 和 this.state 应该是只读的。

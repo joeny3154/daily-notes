@@ -27,7 +27,7 @@ url: "/topics/components"
 
 You’ll have access match objects in various places:
 
-***你将match在不同的地方访问对象：***
+**你将match在不同的地方访问对象：**
 
 - `Route` component: `this.props.match`
 - `Route` render: `({ match }) => ()`

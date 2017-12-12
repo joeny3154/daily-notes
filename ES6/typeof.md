@@ -46,7 +46,7 @@ typeof[(]expression[)]
 - 测试变量的数据类型
 
 - 判断一个变量是否存在
-  ***常见于if判断***
+  **常见于if判断**
   错误写法：如果a不存在（未声明）则会出错
 ```
 if (a) {
@@ -62,7 +62,7 @@ if (typeof a === 'undefined') {
 
 ```
 
-  还常见于***三元表达式中***：
+  还常见于**三元表达式中**：
   ```
   closable = typeof closable === 'undefined' ? true : closable;
   ```

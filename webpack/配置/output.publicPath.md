@@ -4,10 +4,10 @@ output.publicPath
 
 http://www.css88.com/doc/webpack2/configuration/output/
 
-对于***按需加载(on-demand-load)***或***加载外部资源(external resources)（如图片、文件等）***来说，`output.publicPath` 是很重要的选项。
+对于**按需加载(on-demand-load)**或**加载外部资源(external resources)（如图片、文件等）**来说，`output.publicPath` 是很重要的选项。
 如果指定了一个错误的值，则在加载这些资源时会收到 404 错误。
 
-***作用：*** 此选项指定在浏览器中所引用的「此输出目录对应的公开 URL」
+**作用：** 此选项指定在浏览器中所引用的「此输出目录对应的公开 URL」
 
 相对 URL(relative URL) 会被相对于 HTML 页面（或 <base> 标签）解析。
 相对于服务的 URL(Server-relative URL)，

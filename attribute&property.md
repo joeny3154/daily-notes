@@ -18,7 +18,7 @@ attribute 初始化 DOM property，然后它们的任务就完成了。property 
 例如，当浏览器渲染`<input type="text" value="Bob">`时，它将创建相应 `DOM` 节点， 其`value property` 被初始化为 “Bob”。
 当用户在输入框中输入 “Sally” 时，DOM 元素的`value property` 变成了 “Sally”。 但是这个 HTML value attribute 保持不变。如果我们读取 input 元素的 `attribute`，就会发现确实没变： `input.getAttribute('value') // 返回 "Bob"`。
 
-***`HTML attribute value`指定了初始值；`DOM value property` 是当前值。***
+**`HTML attribute value`指定了初始值；`DOM value property` 是当前值。**
 
 `disabled attribute` 是另一个古怪的例子。按钮的`disabled property` 是`false`，因为默认情况下按钮是可用的。 当我们添加`disabled attribute `时，只要它出现了按钮的`disabled property `就初始化为`true`，于是按钮就被禁用了。
 

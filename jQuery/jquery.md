@@ -81,24 +81,22 @@ jQuery的.html()会调用.innerHTML来操作，但同时也会catch异常，然�
 
 # 属性操作
 
-- attr() 返回 `attributes` 的值
+- `attr()` 返回 `attributes` 的值
   获取匹配的元素集合中的第一个元素的属性的值。设置每一个匹配元素的一个或多个属性
-- removeAttr()
-  为匹配的元素集合中的每个元素中移除一个属性（attribute）。
 
-- prop() 返回 `property` 的值
+- `removeAttr()`为匹配的元素集合中的每个元素中移除一个属性（attribute）。
+
+- `prop()` 返回 `property` 的值
   若要检索和更改DOM属性，比如元素的`checked`, `selected`, 或 `disabled` 状态，请使用`.prop()`方法。
   selectedIndex, tagName, nodeName, nodeType, ownerDocument, defaultChecked, 和 defaultSelected 应使用.prop()方法进行取值或赋值
 
-- removeProp()
-为集合中匹配的元素删除一个属性（property）
+- `removeProp()` 为集合中匹配的元素删除一个属性（property）
 
-- val()
-获取匹配的元素集合中第一个元素的当前值。设置匹配的元素集合中每个元素的值。
+- `val()` 获取匹配的元素集合中第一个元素的当前值。设置匹配的元素集合中每个元素的值。
 
 # 文本操作
 
- `text()`
+- `text()`
 
 # 事件
 
@@ -143,11 +141,9 @@ jQuery的.html()会调用.innerHTML来操作，但同时也会catch异常，然�
 
 # 文档加载
 
-`.load()` 为 JavaScript 的 "load" 事件绑定一个处理函数
-
-`.ready()` 当DOM准备就绪时，指定一个函数来执行。
-
-`.unload()` 为 JavaScript 的 "unload" 事件绑定一个处理函数。
+- `.load()` 为 JavaScript 的 "load" 事件绑定一个处理函数
+- `.ready()` 当DOM准备就绪时，指定一个函数来执行。
+- `.unload()` 为 JavaScript 的 "unload" 事件绑定一个处理函数。
 
 # 原生
 

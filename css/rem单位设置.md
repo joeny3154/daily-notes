@@ -64,3 +64,24 @@ h1 {
   font-size: 20/@rem;
 }
 ```
+
+
+
+window.addEventListener(('orientationchange' in window ? 'orientationchange' : 'resize'), (function () {
+    function f() {
+        var d = document.documentElement;
+        var cw = d.clientWidth || 720;
+        var fs = 0;
+        if (cw <= 360) {
+            fs = 24;
+        } else if (cw <= 416) {
+            fs = 26;
+        } else {
+            fs = 20 * (cw / 360) > 40 ? 40 : 20 * (cw / 360);
+        }
+        d.style.fontSize = fs + 'px';
+    }
+
+    f();
+    return f;
+})(), false);

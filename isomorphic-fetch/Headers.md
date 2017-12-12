@@ -42,7 +42,7 @@ console.log(myHeaders.getAll("X-Custom-Header")); // [ ]
 
 如果使用了一个不合法的HTTP Header属性名，那么Headers的方法通常都抛出 TypeError 异常。如果不小心写入了一个不可写的属性，也会抛出一个 TypeError 异常。
 
-除此以外的情况，***失败了并不抛出异常***。例如:
+除此以外的情况，**失败了并不抛出异常**。例如:
 
 eg:
 

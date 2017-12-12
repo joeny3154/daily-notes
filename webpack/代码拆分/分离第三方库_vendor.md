@@ -4,7 +4,7 @@
 
 [如何使用 CommonsChunkPlugin 分离 vendor/library 代码](http://www.css88.com/doc/webpack2/guides/code-splitting-libraries)
 
-***目标：***
+**目标：**
 应用本身的代码改变不导致vendor 文件的改变； 第三方代码（vendor 文件的 hash 始终恒定不变，利于浏览器缓存
 
 所以： 只有当我们把 `vendor` 和应用代码的 `bundle` 分离时，才能实现这一目标
@@ -28,7 +28,7 @@ module.exports = function(env) {
 }
 ```
 
-***存在的问题：***
+**存在的问题：**
 
 项目中运行 webpack，如果你查看生成的包，会发现 moment 和 index.js 都被打包进了 bundle.js。
 这对于该应用来说是很不理想的。如果 index.js 中的代码改变了，那么整个 bundle 都会重新构建。浏览器就需要加载新的 bundle，即使其中大部分代码都没改变。
@@ -54,7 +54,7 @@ module.exports = function(env) {
 }
 ```
 
-***存在的问题：***
+**存在的问题：**
 
 再次运行 `webpack` ，可以发现生成了两个 `bundle` 。然而如果查看他们的代码，会发现 `moment` 的代码在两个文件中都出现了！
 我们希望两个入口的共享一份 `moment` 代码，的正是由于这个原因，我们需要使用`CommonsChunkPlugin`
@@ -126,7 +126,7 @@ module.exports = function() {
 
 ```
 
-***存在问题：***
+**存在问题：**
 
 但是，如果我们改变应用的代码并且再次运行 webpack，可以看到 vendor 文件的 hash 改变了。即使我们把 vendor 和 main 的 bundle 分开了，也会发现 vendor bundle 会随着应用代码改变。
 

@@ -1,0 +1,95 @@
+
+@wrap-w: 100%;
+@wrap-h: 200px;
+
+.wrap {
+  width: @wrap-w;
+  height: @wrap-h;
+  margin-bottom: 20px;
+  position: relative;
+  border: 1px solid #000000;
+}
+.border {
+  border: 1px solid #000000;
+}
+.inner {
+  width: 180px;
+  height: 180px;
+  background: pink;
+}
+.clear {
+  clear: both
+}
+
+.clearfix::after {
+  content:"clear";
+  display:block;
+  clear:both; 
+  line-height:0;
+  height:0;
+  visibility:hidden;
+  zoom:1;
+}
+// 垂直居中 eg
+.vertical {
+  .wrap {
+    .c-1 {
+      position: absolute;
+      width:180px;
+      height:180px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      background:orange;
+    }
+
+    &.table {
+      display: table;
+      .c-2 {
+        display:table-cell;
+        vertical-align:middle;
+        text-align: center;
+        width:120px;
+        height:120px;
+        .inner {
+          display: inline-block;
+        }
+      }
+    }
+
+    &.inline-block {
+      text-align: center;
+      .c-3 {
+        vertical-align: middle;
+        display: inline-block;
+        background: pink;
+      }
+      .extra {
+        vertical-align: middle;
+        display: inline-block;
+        height: 100%;
+        font-size: 0;
+      }
+    }
+  }
+  
+}
+
+.center {
+}
+
+.w {
+  background: orange;
+  // overflow: hidden;
+  padding: 10px;
+  // display: table;
+  width: 100%;
+  .float {
+    float: left;
+    height: 200px;
+    width: 200px;
+    background: pink;
+  }
+}

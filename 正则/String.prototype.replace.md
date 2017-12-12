@@ -5,7 +5,7 @@ String.prototype.replace()
 
 # 参数1： 搜索模式
 
-***搜索模式如果不加g修饰符，就替换第一个匹配成功的值，否则替换所有匹配成功的值***
+**搜索模式如果不加g修饰符，就替换第一个匹配成功的值，否则替换所有匹配成功的值**
 
 ```
 'aaa'.replace('a', 'b') // "baa"
@@ -55,7 +55,7 @@ a.replace(pattern, function replacer(match) {
 // The QUICK BROWN fox jumped over the LAZY dog.
 ```
 
-***替换函数，可以接受多个参数***
+**替换函数，可以接受多个参数**
 
 第一个参数是捕捉到的内容，
 第二个参数是捕捉到的组匹配（有多少个组匹配，就有多少个对应的参数）。

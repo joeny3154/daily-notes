@@ -11,7 +11,7 @@ https://reacttraining.com/react-router/web/api/Route
 - `<Route render>`
 - `<Route children>`
 
-每个在不同的情况下都有用。***在一个 `<Route>` 中只能使用其中一个props***, 不能同时使用。看下面的解释，能了解为什么有3个选项。大部分时间你会使用`component`。
+每个在不同的情况下都有用。**在一个 `<Route>` 中只能使用其中一个props**, 不能同时使用。看下面的解释，能了解为什么有3个选项。大部分时间你会使用`component`。
 
 三种渲染方法都能得到相同的props
 
@@ -111,7 +111,7 @@ eg: `<Route strict path="/one/" component={About}/>`
 | /one/	  |  /one/	            |  yes             |
 | /one/	  |  /one/two	          |  yes             |
 
-***警告：***
+**警告：**
 
 严格可以用来强制执行一个location.pathname没有结尾的斜杠，但为了做到这一点 `strict` 和 `exact` 必须设置: 
 

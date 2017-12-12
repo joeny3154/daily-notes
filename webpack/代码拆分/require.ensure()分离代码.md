@@ -9,13 +9,13 @@
 
 webpack 在编译时，会静态地解析代码中的 require.ensure()，同时将模块添加到一个分开的 chunk 当中。
 
-这个新的 chunk 会被 webpack 通过 *** `jsonp` ***来按需加载。
+这个新的 chunk 会被 webpack 通过 ** `jsonp` **来按需加载。
 
 # 语法
 
 `require.ensure(dependencies: String[], callback: function(require), chunkName: String)`
 
-***参数说明：***
+**参数说明：**
 
 - dependencies: 依赖
 
@@ -56,10 +56,10 @@ require.ensure([], function(require){
 });
 
 \\ a.js
-console.log('***** I AM a *****');
+console.log('**** I AM a ****');
 
 \\ b.js
-console.log('***** I AM b *****');
+console.log('**** I AM b ****');
 ```
 
 ```

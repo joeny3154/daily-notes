@@ -78,7 +78,7 @@ const resetAction = NavigationActions.reset({
 this.props.navigation.dispatch(resetAction)
 
 ```
-***如何使用`index`参数***
+**如何使用`index`参数**
 
 The index param is used to specify the current active route.
 eg: given a basic stack navigation with two routes Profile and Settings. To reset the state to a point where the active screen was Settings but have it stacked on top of a Profile screen, you would do the following:

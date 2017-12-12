@@ -67,7 +67,7 @@ waitForChunk(function(file) {
 // 将 require 包裹在 require.ensure 的代码块中
 ```
 
-当你引用文件束的时候，chunk 会被浏览器加载。如果你想它***懒加载***，请用：
+当你引用文件束的时候，chunk 会被浏览器加载。如果你想它**懒加载**，请用：
 
 ```
 var load = require("bundle-loader?lazy!./file.js");

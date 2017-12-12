@@ -2,7 +2,7 @@
 代码分割 - CSS
 ========
 
-***目标：*** 从 bundle 中抽离css, 可以有效利用 浏览器的异步 和 并行加载CSS 的能力。
+**目标：** 从 bundle 中抽离css, 可以有效利用 浏览器的异步 和 并行加载CSS 的能力。
 
 要通过webpack打包CSS，像任何其他模块一样将CSS导入JavaScript代码，并使用css-loader（它输出CSS作为JS模块），并可选地应用ExtractTextWebpackPlugin（它提取打包的CSS并输出CSS文件）。
 
@@ -30,9 +30,9 @@ module.exports = {
 
 结果，CSS和您的JavaScript打包在一起。
 
-***缺点：***
+**缺点：**
 
-您将无法利用***浏览器的异步*** 和 ***并行加载CSS的能力***。这样，您的网页必须等待，直到您的整个JavaScript 包下载完成，然后重绘网页。
+您将无法利用**浏览器的异步** 和 **并行加载CSS的能力**。这样，您的网页必须等待，直到您的整个JavaScript 包下载完成，然后重绘网页。
 
 webpack可以通过使用 `ExtractTextWebpackPlugin` 分别打包CSS来帮助解决这个问题。
 

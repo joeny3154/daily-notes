@@ -7,7 +7,7 @@
 
 string
 
-output 目录对应一个***绝对路径***。
+output 目录对应一个**绝对路径**。
 
 path: path.resolve(__dirname, 'dist/assets')
 
@@ -16,7 +16,7 @@ path: path.resolve(__dirname, 'dist/assets')
 
 `string`
 
-此选项决定了***按需加载***(on-demand loaded)的 chunk 文件的名称。有关可取的值的详细信息，请查看 `output.filename` 选项。
+此选项决定了**按需加载**(on-demand loaded)的 chunk 文件的名称。有关可取的值的详细信息，请查看 `output.filename` 选项。
 
 注意，这些文件名需要在 `runtime` 根据 `chunk` 发送的请求去生成。因此，需要在 webpack runtime 输出 `bundle` 值时，将 `chunk id` 的值对应映射到占位符(如 `[name]` 和 `[chunkhash]`)。这会增加文件大小，并且在任何 `chunk` 的占位符值修改后，都会使 bundle 失效。
 
@@ -46,14 +46,14 @@ path: path.resolve(__dirname, 'dist/assets')
 
 注意此选项被称为文件名，但是你还是可以创建像 "`js/[name]/bundle.js`" 这样的文件夹结构。
 
-***注意***
+**注意**
 
 此选项不会影响那些「按需加载 chunk」的输出文件。对于这些文件，请使用 `output.chunkFilename` 选项来控制输出。
 同样也不影响通过 `loader` 创建的文件，对于这些文件，请查看 `loader` 选项来输出控制。
 
 # `output.library`
 
-在编写一个导出值的 `JavaScript library` 时，可以使用下面的 `library` 和 `libraryTarget，`***导出值可以作为其他代码的依赖***。传入 `library` 名称的字符串。
+在编写一个导出值的 `JavaScript library` 时，可以使用下面的 `library` 和 `libraryTarget，`**导出值可以作为其他代码的依赖**。传入 `library` 名称的字符串。
 
 注意，`output.libraryTarget` 的默认值是 `var`。这意味着，如果使用 `output.libraryTarget` 的默认值，`output.library` 会将值作为变量声明导出（当使用 script 标签时，其执行后在全局作用域可用）。
 

@@ -14,4 +14,4 @@ state(状态) 包含该组件的的特定数据，该数据可能随时间而变
 
 有关 state(状态) 的详细信息，请参阅 [状态(State) 和生命周期](http://www.css88.com/react/docs/state-and-lifecycle.html) 。
 
-***注意：***永远不要直接改变 `this.state` ，因为调用 setState() 之后可能会覆盖你所做的这个改变。 把 `this.state` 看作是不可变的。
+**注意：**永远不要直接改变 `this.state` ，因为调用 setState() 之后可能会覆盖你所做的这个改变。 把 `this.state` 看作是不可变的。

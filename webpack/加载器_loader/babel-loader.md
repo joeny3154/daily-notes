@@ -13,4 +13,4 @@ http://www.css88.com/doc/webpack2/loaders/babel-loader/
 - `forceEnv`：默认将解析BABEL_ENV，然后NODE_ENV。允许您在加载器级别覆BABEL_ENV/NODE_ENV。对于同构应用程序，在为客户端和服务器配置不同的babel时有用。
 
 
-***注意：*** sourceMap选项被忽略，相反，当webpack配置为使用sourceMaps时，会自动启用它们（通过devtool 配置选项）。
+**注意：** sourceMap选项被忽略，相反，当webpack配置为使用sourceMaps时，会自动启用它们（通过devtool 配置选项）。

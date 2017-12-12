@@ -8,7 +8,7 @@ npm install --save react-navigation
 
 stack就是数据结构的堆栈技术,遵循后进先出的原理
 
-***每一个被到导航的screen(导航画面)被放在堆栈的栈顶***,返回时候,会从栈顶弹出对应的组件
+**每一个被到导航的screen(导航画面)被放在堆栈的栈顶**,返回时候,会从栈顶弹出对应的组件
 
 import { StackNavigator } from 'react-navigation';
 

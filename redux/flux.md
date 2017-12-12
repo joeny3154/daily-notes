@@ -6,12 +6,12 @@ https://github.com/acdlite/flux-standard-action
 
 ### Actions
 
-***An action MUST***
+**An action MUST**
 
 be a plain JavaScript object.
 have a `type` property. 用户动作的唯一标识符
 
-***An action MAY***
+**An action MAY**
 
 have an `error` property. 出错的情况下为true, 其他情况不需要提供
 have a `payload` property. action相关的数据，一般来自于后端接口，用于更新store，在出错的情况下为错误对象
