@@ -37,3 +37,26 @@ function instance_of(L, R) {
   } 
 }
 ```
+
+**判断数组**
+
+1. instanceof
+const a = [];
+const b = {};
+console.log(a instanceof Array);//true
+console.log(a instanceof Object);//true,在数组的原型链上也能找到Object构造函数
+console.log(b instanceof Array);//false
+
+2. toString
+const isArray = (something)=>{
+    return Object.prototype.toString.call(something) === '[object Array]';
+}
+
+3. isArray
+Array.isArray是ES5标准中增加的方法，部分比较老的浏览器可能会有兼容问题
+
+if (!Array.isArray) {
+  Array.isArray = function(arg) {
+    return Object.prototype.toString.call(arg) === '[object Array]';
+  };
+}
