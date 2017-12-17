@@ -26,7 +26,7 @@ HTTP 协议有一个缺陷：通信只能由客户端发起,HTTP 协议做不到
 5. 没有同源限制，客户端可以与任意服务器通信。
 6. 协议标识符是ws（如果加密，则为wss），服务器网址就是 URL。 `ws://example.com:80/some/path`
 
-![websocket](../img/websocket.jpg)
+![websocket](./img/websocket.jpg)
 
 
 eg:客户端的简单示例
