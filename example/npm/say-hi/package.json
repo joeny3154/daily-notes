@@ -1,0 +1,15 @@
+{
+  "name": "wj-say-hi",
+  "version": "1.0.1",
+  "description": "npm example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "npm",
+    "example"
+  ],
+  "author": "wanjun1130",
+  "license": "ISC"
+}
