@@ -1,6 +1,8 @@
-var $  = {}
+var getMyNpmInfo = require('getMyNpmInfo')
 
-$ = (function () {
+var validater  = {}
+
+validater = (function () {
   'use strict'
 
   var types = 'Array Object String Date RegExp Function Boolean Number Null Undefined'.split(' ')
@@ -17,7 +19,11 @@ $ = (function () {
       })(types[i])
   }
 
-  return $
+  return validater
 })()
 
-module.exports = $
+
+module.exports = {
+  validater,
+  getMyNpmInfo
+}

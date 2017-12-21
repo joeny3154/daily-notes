@@ -1,30 +1,38 @@
 
 # API
 
-- isArray()
+- `validater`
 
-- isObject()
+  - isArray()
 
-- isString()
+  - isObject()
 
-- isDate()
+  - isString()
 
-- isRegExp()
+  - isDate()
 
-- isFunction()
+  - isRegExp()
 
-- isBoolean()
+  - isFunction()
 
-- isNumber()
+  - isBoolean()
 
-- isNull()
+  - isNumber()
 
-- isUndefined()
+  - isNull()
+
+  - isUndefined()
+
+- `getMyNpmInfo`
 
 # 示例
 
 ```
-var $ = require('s-wanjun-validate')
-console.log('funtion=>', $.isFunction(() => {}))
-console.log('array=>', $.isArray([]))
+var { validater, getMyNpmInfo } = require('s-wanjun-validate')
+
+<!-- validater -->
+console.log('funtion=>', validater.isFunction(() => {})) // true
+
+<!-- getMyNpmInfo -->
+getMyNpmInfo().then(json => console.log('json=>', json))
 ```

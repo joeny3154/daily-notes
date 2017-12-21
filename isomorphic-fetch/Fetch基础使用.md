@@ -1,6 +1,53 @@
 
-Fetch API
-=========
+
+# 安装
+
+`yarn add isomorphic-fetch es6-promise`
+
+`npm install --save isomorphic-fetch es6-promise`
+
+# 使用
+
+eg: 基本使用 
+```
+require('es6-promise').polyfill();
+var fetch = require('isomorphic-fetch');
+ 
+fetch('//offline-news-api.herokuapp.com/stories')
+    .then(function(response) {
+        if (response.status >= 400) {
+            throw new Error("Bad response from server");
+        }
+        return response.json();
+    })
+    .then(function(stories) {
+        console.log(stories);
+    });
+```
+
+eg: 自定义请求对象
+
+```
+var myHeaders = new Headers();
+
+var myInit = { 
+  method: 'GET',
+  headers: myHeaders,
+  mode: 'cors',
+  cache: 'default'
+};
+
+var myRequest = new Request('flowers.jpg', myInit);
+
+fetch(myRequest).then(function(response) {
+  return response.blob();
+}).then(function(myBlob) {
+  var objectURL = URL.createObjectURL(myBlob);
+  myImage.src = objectURL;
+});
+```
+
+# Fetch API
 
 
 Fetch API  提供了一个 JavaScript接口，用于访问和操纵HTTP管道的部分，例如请求和响应。它还提供了一个全局 fetch()方法，该方法提供了一种简单，合乎逻辑的方式来跨网络异步获取资源。
@@ -43,7 +90,6 @@ fetch('flowers.jpg').then(function(response) {
 **自定义请求(request)对象:**
 
 除了传给 fetch() 一个资源的地址，你还可以通过使用 Request() 构造函数来创建一个 request 对象，然后再作为参数传给 fetch()：
-
 
 eg: 
 
