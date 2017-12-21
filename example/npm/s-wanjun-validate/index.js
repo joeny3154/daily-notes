@@ -1,4 +1,4 @@
-var getMyNpmInfo = require('getMyNpmInfo')
+var getMyNpmInfo = require('./getMyNpmInfo.js')
 
 var validater  = {}
 
@@ -12,7 +12,7 @@ validater = (function () {
   }
 
   for (var i = 0; i < types.length; i ++) {
-      $['is' + types[i]] = (function (self) {
+    validater['is' + types[i]] = (function (self) {
           return function (elem) {
             return type.call(elem) === self
           }

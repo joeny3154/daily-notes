@@ -6,3 +6,6 @@ Vue.js 是构建客户端应用程序的框架。默认情况下，可以在浏�
 然而，也可以将同一个**组件渲染为服务器端的 HTML 字符串，将它们直接发送到浏览器**，最后将静态标记"混合"为客户端上完全交互的应用程序。
 
 服务器渲染的 Vue.js 应用程序也可以被认为是"同构"或"通用"，因为应用程序的大部分代码都可以在服务器和客户端上运行。
+
+
+demo： https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Ftangdaohai%2Fvue-prerender-demo
