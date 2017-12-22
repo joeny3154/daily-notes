@@ -9,6 +9,7 @@ const About = {template: '<div><h2>About Page</h2></div>'}
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history', // 注意这里也是为history模式
   routes: [
     {
       path: '/',
