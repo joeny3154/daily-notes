@@ -1,4 +1,9 @@
-https://ssr.vuejs.org/zh/
+
+官方文档 https://ssr.vuejs.org/zh/
+
+官方示例代码 https://github.com/vuejs/vue-hackernews-2.0/blob/master/src/entry-server.js
+
+参考文档 https://juejin.im/entry/5a02b29bf265da430b7aaa8d
 
 # 什么是服务器端渲染(SSR)？
 
@@ -16,14 +21,40 @@ demo： https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Ftangdaohai%2Fv
 
 > 通用代码: 在客户端与服务器端都会运行的部分为通用代码。
 
-1. 注意服务端只调用beforeCreat与created两个钩子，所以不可以做类似于在created初始化一个定时器，然后在mounted或者destroyed销毁这个定时器，不然服务器会慢慢的被这些定时器给榨干了
+1. 避免在 beforeCreate 和 created 生命周期时产生全局副作用的代码
 
-2. 因单线程的机制，在服务器端渲染时，过程中有类似于单例的操作，那么所有的请求都会共享这个单例的操作，所以应该使用工厂函数来确保每个请求之间的独立性。
+避免在 beforeCreate 和 created 生命周期时产生全局副作用的代码，例如在其中使用 setInterval 设置 timer。在纯客户端(client-side only)的代码中，我们可以设置一个 timer，然后在 beforeDestroy 或 destroyed 生命周期时将其销毁。但是，由于在 SSR 期间并不会调用销毁钩子函数，所以 timer 将永远保留下来。
+
+为了避免这种情况，**请将副作用代码移动到 beforeMount 或 mounted 生命周期中**
+
+2. 避免状态单例
+
+Node.js 服务器是一个长期运行的进程。当我们的代码进入该进程时，它将进行一次取值并留存在内存中。这意味着如果创建一个单例对象，它将在每个传入的请求之间共享。
+**应该暴露一个可以重复执行的工厂函数，为每个请求创建新的应用程序实例**
+
+同样的规则也适用于 `router`、`store` 和 `event bus` 实例。你不应该直接从模块导出并将其导入到应用程序中，而是需要在 createApp 中创建一个新的实例，并从根 Vue 实例注入。
+
+> 在使用带有 `{ runInNewContext: true }` 的 `bundle renderer` 时，可以消除此约束，但是由于需要为每个请求创建一个新的 `vm` 上下文，因此伴随有一些显著性能开销。
 
 3. 如有在beforeCreat与created钩子中使用第三方的API，需要确保该类API在node端运行时不会出现错误，比如在created钩子中初始化一个数据请求的操作，这是正常并且及其合理的做法。但如果只单纯的使用XHR去操作，那在node端渲染时就出现问题了，所以应该采取axios这种浏览器端与服务器端都支持的第三方库。
 
-4. 最重要一点: 切勿在通用代码中使用document这种只在浏览器端可以运行的API，反过来也不可以使用只在node端可以运行的API。
+在纯客户端应用程序(client-only app)中，每个用户会在他们各自的浏览器中使用新的应用程序实例。对于服务器端渲染，我们也希望如此：每个请求应该都是全新的、独立的应用程序实例，以便不会有交叉请求造成的状态污染(cross-request state pollution)。
 
+4. 通用代码不可接受特定平台的 API
+
+因此如果你的代码中，直接使用了像 window 或 document，这种仅浏览器可用的全局变量，则会在 Node.js 中执行时抛出错误，反之也是如此
+
+建议将平台特定实现包含在通用 API 中: 例如，axios 是一个 HTTP 客户端，可以向服务器和客户端都暴露相同的 API
+
+对于仅浏览器可用的 API，通常方式是，在「纯客户端(client-only)」的生命周期钩子函数中惰性访问(lazily access)它们。
+
+5. 自定义指令处理
+
+大多数自定义指令直接操作 DOM，因此会在服务器端渲染(SSR)过程中导致错误。有两种方法可以解决这个问题：
+
+推荐使用组件作为抽象机制，并运行在「虚拟 DOM 层级(Virtual-DOM level)」（例如，使用渲染函数(render function)）。
+
+如果你有一个自定义指令，但是不是很容易替换为组件，则可以在创建服务器 renderer 时，使用 directives 选项所提供"服务器端版本(server-side version)"。
 
 # 开始
 

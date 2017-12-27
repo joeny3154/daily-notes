@@ -1,6 +1,21 @@
 导航守卫
 ======
 
+# 概要
+
+- 全局钩子
+  - `beforeEach`： 全局守卫
+  - `beforeResolve`： 全局解析守卫
+  - `afterEach`： 全局后置钩子
+
+- 组件独享钩子
+  - `beforeEnter`
+
+- 组件钩子
+  - `beforeRouteEnter`：在渲染该组件的对应路由被 confirm 前调用
+  - `beforeRouteUpdate`：在当前路由改变，但是该组件被复用时调用
+  - `beforeRouteLeave`：导航离开该组件的对应路由时调用
+
 导航守卫主要用来通过跳转或取消的方式守卫导航。
 
 有多种机会植入路由导航过程中：**全局的**, **单个路由独享的**, 或者**组件级**的。
@@ -17,7 +32,7 @@
 
 # 路由独享的守卫
 
-在路由配置上直接定义 beforeEnter 守卫：
+在路由配置上直接定义 `beforeEnter` 守卫：
 
 const router = new VueRouter({
   routes: [

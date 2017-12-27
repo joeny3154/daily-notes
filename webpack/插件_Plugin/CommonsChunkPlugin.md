@@ -1,5 +1,4 @@
 
-
 [CommonsChunkPlugin](http://www.css88.com/doc/webpack2/plugins/commons-chunk-plugin/)
 
 ```
@@ -8,7 +7,7 @@ new webpack.optimize.CommonsChunkPlugin(options)
 
 配置
 
-```
+``` js
 {
   name: string, // or
   names: string[],
@@ -52,7 +51,7 @@ new webpack.optimize.CommonsChunkPlugin(options)
 
 生成一个额外的 chunk 包含入口chunk 的公共模块。
 
-```
+``` js
 new webpack.optimize.CommonsChunkPlugin({
   name: "commons",
   // ( 公共chunk(commnons chunk) 的名称)
@@ -70,14 +69,14 @@ new webpack.optimize.CommonsChunkPlugin({
 
 你必须在 入口chunk 之前加载生成的这个 公共chunk:
 
-```
+``` html
 <script src="commons.js" charset="utf-8"></script>
 <script src="entry.bundle.js" charset="utf-8"></script>
 ```
 
 ### 明确第三方库 chunk
 
-```
+``` js
 entry: {
   <!-- 如此其他入口引用了vendor入口的模块，就满足了CommonsChunkPlugin抽离公共代码块的条件 -->
   vendor: ["jquery", "other-lib"],
@@ -104,7 +103,7 @@ new webpack.optimize.CommonsChunkPlugin({
 
 使用代码拆分功能，一个 chunk 的多个子 chunk 会有公共的模块。你可以将这些公共模块移入父 chunk (这个会减少总体的大小，但会对首次加载时间产生不良影响。如果预期用户需要下载许多兄弟 chunks，那这将非常有用)。
 
-```
+``` js
 new webpack.optimize.CommonsChunkPlugin({
   // names: ["app", "subPageA"]
   // (选择 chunks，或者忽略该项设置以选择全部 chunks)
@@ -122,7 +121,7 @@ new webpack.optimize.CommonsChunkPlugin({
 与上面的类似，但是并非将公共模块移动到父 chunk（增加初始加载时间），而是使用新的异步加载的额外公共chunk。当下载额外的 chunk 时，它将自动并行下载。
 
 
-```
+``` js
 new webpack.optimize.CommonsChunkPlugin({
   // names: ["app", "subPageA"]
  // (选择 chunks，或者忽略该项设置以选择全部 chunks)
@@ -148,7 +147,7 @@ new webpack.optimize.CommonsChunkPlugin({
 
 当你想要对 CommonsChunk 如何决定模块被打包到哪里的算法有更为细致的控制， 这个配置就会非常有用。
 
-```
+``` js
 new webpack.optimize.CommonsChunkPlugin({
   name: "my-single-lib-chunk",
   filename: "my-single-lib-chunk.js",

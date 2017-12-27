@@ -1,3 +1,6 @@
+
+http://www.css88.com/doc/webpack2/plugins/commons-chunk-plugin/
+
 - webpack中chunk的概念
 
 webpack将多个模块打包之后的代码集合称为chunk。
@@ -5,7 +8,7 @@ webpack将多个模块打包之后的代码集合称为chunk。
 
 - 提取库代码
 
-```
+``` js
 entry: {
   app: "./app.js",
   vendor: ["lodash","jquery"],
@@ -22,7 +25,7 @@ plugins: [
 - 提取公有代码
 
 
-```
+``` js
 entry: { 
     page1: "./page1.js", 
     page2: "./page2.js" 
@@ -34,7 +37,7 @@ plugins: [ new webpack.optimize.CommonsChunkPlugin("common.[chunkhash].js") ]
 ```
 
 
-```
+``` js
 new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: function (module, count) {
@@ -65,7 +68,7 @@ options.children(boolean):如果为true,那么公共组件的所有子依赖都�
 options.async(boolean|string):如果为true,将创建一个 option.name的子chunks（options.chunks的同级chunks） 异步common chunk
 options.minSize(number):所有公共module的size 要大于number，才会创建common chunk
 
-
+``` js
 {
   name: string, // or
   names: string[],
@@ -104,6 +107,6 @@ options.minSize(number):所有公共module的size 要大于number，才会创建
   minSize: number,
   // 在 公共chunk 被创建立之前，所有 公共模块 (common module) 的最少大小。
 }
-
+```
 
 https://doc.webpack-china.org/plugins/commons-chunk-plugin/
