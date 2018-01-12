@@ -11,6 +11,7 @@ export default context => {
     router.push(context.url)
     // 等到 router 将可能的异步组件和钩子函数解析完
     router.onReady(() => {
+      // 返回当前路由匹配的组件数组（是数组的定义/构造类，不是实例）
       const matchedComponents = router.getMatchedComponents()
       // 匹配不到的路由，执行 reject 函数，并返回 404
       if (!matchedComponents.length) {

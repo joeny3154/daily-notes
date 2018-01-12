@@ -32,8 +32,12 @@ new webpack.optimize.CommonsChunkPlugin(options)
 
   children: boolean,
   // 如果设置为 `true`，所有  公共chunk 的子模块都会被选择
+  
+  // 使用代码拆分功能，一个 chunk 的多个子 chunk 会有公共的模块。你可以将这些公共模块移入父 chunk (这个会减少总体的大小，但会对首次加载时间产生不良影响。如果预期用户需要下载许多兄弟 chunks，那这将非常有用)
 
   async: boolean|string,
+  // 与上面的类似，但是并非将公共模块移动到父 chunk（增加初始加载时间），而是使用新的异步加载的额外公共chunk。当下载额外的 chunk 时，它将自动并行下载。
+
   // 如果设置为 `true`，一个异步的  公共chunk 会作为 `options.name` 的子模块，和 `options.chunks` 的兄弟模块被创建。
   // 它会与 `options.chunks` 并行被加载。可以通过提供想要的字符串，而不是 `true` 来对输出的文件进行更换名称。
 

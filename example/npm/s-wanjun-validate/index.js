@@ -1,4 +1,5 @@
 var getMyNpmInfo = require('./getMyNpmInfo.js')
+var charStat = require('./charStat.js')
 
 var validater  = {}
 
@@ -25,5 +26,6 @@ validater = (function () {
 
 module.exports = {
   validater,
-  getMyNpmInfo
+  getMyNpmInfo,
+  charStat
 }
