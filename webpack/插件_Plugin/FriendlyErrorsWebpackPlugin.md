@@ -56,6 +56,7 @@ app.use(require('webpack-hot-middleware')(compiler, {
 
 ``` js
 new FriendlyErrorsPlugin({
+  // 编译成功提醒
   compilationSuccessInfo: {
     messages: ['您的应用程序运行在 http://localhost:3000'],
     notes: ['显示成功编译额外字符']
