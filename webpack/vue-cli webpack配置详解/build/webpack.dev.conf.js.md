@@ -8,6 +8,7 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 能够更好在终端看到webapck运行的警告和错误
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+// 自动检索下一个可用端口
 const portfinder = require('portfinder')
 
 const HOST = process.env.HOST
@@ -15,6 +16,7 @@ const PORT = process.env.PORT && Number(process.env.PORT)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
+    // 自动生成了 css, postcss, less 等规则，与自己一个个手写一样，默认包括了 css 和 postcss 规则
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
   },
   // cheap-module-eval-source-map is faster for development
@@ -98,16 +100,19 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }),
   ]
 })
-
+// 自动检索下一个可用端口
 module.exports = new Promise((resolve, reject) => {
+  // 获取当前设定的端口
   portfinder.basePort = process.env.PORT || config.dev.port
   portfinder.getPort((err, port) => {
     if (err) {
       reject(err)
     } else {
       // publish the new Port, necessary for e2e tests
+      // 发布新的端口, 需要 e2e 测试
       process.env.PORT = port
       // add port to devServer config
+      // 设置 devServer 端口
       devWebpackConfig.devServer.port = port
 
       // Add FriendlyErrorsPlugin

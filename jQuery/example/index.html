@@ -5,29 +5,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style lang="">
+    * {
+      margin: 0; padding: 0;
+    }
+    html {
+      height: 300px;
+    }
+    body {
+      height: 500px;
+      /* width: 500px; */
+    }
+    .s {
+      min-height: 200px;
+    }
+    .wrap {
+      padding: 50px;
+      background: palegreen;
+      max-height: 200px;
+      overflow: auto;
+      position: relative;
+    }
+    #div {
+      background: pink;
+      margin: 30px;
+      padding: 20px;
+      border: 10px solid #ccc;
+      width: 300px;
+      height: 200px;
+      overflow: auto;
+    }
+    #div p {
+      width: 200%;
+    }
+  </style>
 </head>
 <body>
-  <ul id="list">
-  </ul>
+  <div class="s"></div>
+  <div class="s"></div>
+  <button class="scroll-top">get scrollTop</button>
+  <button class="scroll-left">get scrollLeft</button>
+  <div class="wrap">
+    <div id="div">
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+      <p>这是一段文本</p>
+    </div>
+  </div>
+  <div class="s"></div>
+  <div class="s"></div>
+  <div class="s"></div>
+  <div class="s"></div>
   <script src="./jquery-3.2.1.min.js"></script>
   <script>
-    // $('#list li').bind('click', function() {
-    //   console.log($(this).attr('class'))
-    // })
-    $('#list li').on('click', function() {
-      console.log($(this).attr('class'))
+    var $elem = $('#div')
+    $('.scroll-top').click(function () {
+      console.log('scrollTop=>', $elem.scrollTop())
     })
-    setTimeout(function() {
-      $('#list').append(
-        $(
-          `
-            <li class="i-1">1</li>
-            <li class="i-2">2</li>
-            <li class="i-3">3</li>
-          `
-        )
-      )
-    }, 1000)
+    $('.scroll-left').click(function () {
+      console.log('scrollLeft=>', $elem.scrollLeft())
+    })
+    console.log('offset=>', $elem.offset())
+    console.log('position=>', $elem.position())
+    console.log('---------------')
+    // $elem.scrollTop(100)
+    console.log('scrollTop=>', $elem.scrollTop())
+    // $elem.scrollLeft(100)
+    console.log('scrollLeft=>', $elem.scrollLeft())
+    console.log('---------------')
+    console.log('height=>', $elem.height())
+    console.log('width=>', $elem.width())
+    console.log('---------------')
+    console.log('innerHeight=>', $elem.innerHeight())
+    console.log('innerWidth=>', $elem.innerWidth())
+    console.log('---------------')
+    console.log('outerHeight(false)=>', $elem.outerHeight())
+    console.log('outerWidth(false)=>', $elem.outerWidth())
+    console.log('---------------')
+    console.log('outerHeight(true)=>', $elem.outerHeight(true))
+    console.log('outerWidth(true)=>', $elem.outerWidth(true))
+    console.log('---------------')
+    console.log('window scrollTop', $(window).scrollTop())
+    console.log('document scrollTop', $(document).scrollTop())
+// `document.body.scrollTop`
   </script>
 </body>
 </html>

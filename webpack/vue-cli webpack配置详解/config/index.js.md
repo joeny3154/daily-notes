@@ -6,16 +6,22 @@ const path = require('path')
 module.exports = {
   dev: {
     // Paths
-    assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsSubDirectory: 'static', // 存放打包后静态资源文件的输出目录
+    assetsPublicPath: '/', // 资源文件引用的目录
+    // 代理示例： proxy: [{context: ["/auth", "/api"],target: "http://localhost:3000",}]
     proxyTable: {},
 
     // Various Dev Server settings
+    // 开发服务器变量设置
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    // 自动打开浏览器devServer.open
     autoOpenBrowser: false,
+    // 浏览器错误提示 devServer.overlay
     errorOverlay: true,
+    // 配合 friendly-errors-webpack-plugin
     notifyOnErrors: true,
+    // 是否轮询获取文件改动的通知 配置webpack.devServer.watchOption
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
     // Use Eslint Loader?
@@ -44,11 +50,13 @@ module.exports = {
     // (https://github.com/webpack/css-loader#sourcemaps)
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
+    // develop 下不生成 sourceMap
     cssSourceMap: false,
   },
 
   build: {
     // Template for index.html
+    // 定义HtmlWebpackPlugin生成的模板文件名
     index: path.resolve(__dirname, '../dist/index.html'),
 
     // Paths
@@ -59,7 +67,7 @@ module.exports = {
     /**
      * Source Maps
      */
-
+    // production 下是生成 sourceMap
     productionSourceMap: true,
     // https://webpack.js.org/configuration/devtool/#production
     //  生成完整的 SourceMap，输出为独立文件。由于在 bundle 中添加了引用注释，所以开发工具知道在哪里去找到 SourceMap
