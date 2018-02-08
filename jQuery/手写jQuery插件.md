@@ -119,7 +119,7 @@ eg:
 
 在插件的父闭包中封装所有方法，调用时先传方法名称字符串，接下来再把你需要的其它参数传给该方法, 这种封装和架构是 jQuery 插件社区的一个标准，已经被无数插件所使用，包括 jQueryUI 中的插件和小部件
 
-```
+``` js
 (function($) {
   var methods = {
     init: function() {
@@ -176,7 +176,7 @@ $('div').tooltip('update', 'This is the new tooltip content!');
 bind 方法有个鲜为人知的特性：它支持为绑定事件定义名称空间。如果你的插件要绑定事件，最好为其定义**名称空间**。这样，回头想 unbind 的时候就不会影响到相同事件类型上的其它已绑定事件。要为事件定义名称空间，把 `.<namespace>` 附到要绑定的事件类型后面即可。
 
 
-```
+``` js
 (function( $ ){
 
   var methods = {

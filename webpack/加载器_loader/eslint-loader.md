@@ -49,7 +49,7 @@ module: {
 
 To be safe, you can use enforce: "pre" section to check source files, not modified by other loaders (like babel-loader)
 
-为了安全起见，您可以使用强制：“pre”部分来检查源文件，而不是其他装载器修改（如babel-loader）
+为了安全起见，您可以使用强制`pre`部分来检查源文件，而不是其他装载器修改后的文件（如babel-loader）
 
 `Rule.enforce`
 

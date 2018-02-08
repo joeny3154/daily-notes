@@ -27,6 +27,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
+    // devServer.contentBase: 默认情况下，将使用当前工作目录作为提供内容的目录，devServer.publicPath 将用于确定应该从哪里提供 bundle，并且此选项优先
+    // 你可以修改为其他目录,eg: contentBase: path.join(__dirname, "public");
+    // contentBase: path.join(__dirname, "dist"),
     /*
       有 none, error, warning 或者 info（默认值）等选项，控制台始终都会显示 bundle 的错误和警告，此选项只影响 bundle 的错误和警告之前的消息，比如
       1. 在重新加载之前，2. 在一个错误之前，3.或者模块热替换(Hot Module Replacement)启用时
@@ -40,8 +43,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // 一切服务都启用gzip 压缩：
     compress: true,
     // 只用在命令行工具(CLI)， 指定使用一个 host。默认是 localhost
-    host: HOST || config.dev.host,
-    port: PORT || config.dev.port,
+    host: HOST || config.dev.host,//  host: 'localhost'
+    port: PORT || config.dev.port,// port: 8080
     // 自动打开浏览器，也可以使用命令行工具(CLI)：webpack-dev-server --open 或 webpack-dev-server --open 'Google Chrome'
     open: config.dev.autoOpenBrowser,
     /* 

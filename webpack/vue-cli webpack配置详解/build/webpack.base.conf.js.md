@@ -18,8 +18,12 @@ const createLintingRule = () => ({
   enforce: 'pre',
   include: [resolve('src'), resolve('test')],
   options: {
+    // formatter: 格式化程序， 
+    // 默认是eslint 主流的格式化程序 require("eslint/lib/formatters/stylish"),
+    // eslint-friendly-formatter: 一款社区 formatter
     formatter: require('eslint-friendly-formatter'),
-    emitWarning: !config.dev.showEslintErrorsInOverlay
+    // 错误会显示在浏览器中
+    emitWarning: !config.dev.showEslintErrorsInOverlay // showEslintErrorsInOverlay: false
   }
 })
 
@@ -30,7 +34,7 @@ module.exports = {
     app: './src/main.js'
   },
   output: {
-    // dist/ 目录
+    // dist/ 目录 path.resolve(__dirname, '../dist')
     path: config.build.assetsRoot,
     filename: '[name].js',
     publicPath: process.env.NODE_ENV === 'production'
@@ -50,6 +54,7 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
+        // 详解见下文
         options: vueLoaderConfig
       },
       {
@@ -102,6 +107,52 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
     child_process: 'empty'
+  }
+}
+```
+
+# vueLoaderConfig 完整配置
+
+``` js
+const vueLoaderConfig = {
+  loaders: {
+    css: ['vue-style-loader',
+      { loader: 'css-loader', options: { sourceMap: false } }
+    ],
+    postcss: ['vue-style-loader',
+      { loader: 'css-loader', options: { sourceMap: false } }
+    ],
+    less: ['vue-style-loader',
+      { loader: 'css-loader', options: { sourceMap: false } },
+      { loader: 'less-loader', options: { sourceMap: false } }
+    ],
+    sass: ['vue-style-loader',
+      { loader: 'css-loader', options: { sourceMap: false } },
+      {
+        loader: 'sass-loader',
+        options: { indentedSyntax: true, sourceMap: false }
+      }
+    ],
+    scss: ['vue-style-loader',
+      { loader: 'css-loader', options: { sourceMap: false } },
+      { loader: 'sass-loader', options: { sourceMap: false } }
+    ],
+    stylus: ['vue-style-loader',
+      { loader: 'css-loader', options: { sourceMap: false } },
+      { loader: 'stylus-loader', options: { sourceMap: false } }
+    ],
+    styl: ['vue-style-loader',
+      { loader: 'css-loader', options: { sourceMap: false } },
+      { loader: 'stylus-loader', options: { sourceMap: false } }
+    ]
+  },
+  cssSourceMap: false,
+  cacheBusting: true,
+  transformToRequire: {
+    video: ['src', 'poster'],
+    source: 'src',
+    img: 'src',
+    image: 'xlink:href'
   }
 }
 ```

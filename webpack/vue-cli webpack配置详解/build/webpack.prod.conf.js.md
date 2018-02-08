@@ -133,7 +133,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // This instance extracts shared chunks from code splitted chunks and bundles them
     // in a separate chunk, similar to the vendor chunk
     // see: https://webpack.js.org/plugins/commons-chunk-plugin/#extra-async-commons-chunk
-    // 这个实例从代码拆分块中提取共享块，并将它们捆绑在一个单独的块中，类似于供应商块
+    // 这个实例从代码 拆分的 chunk 中提取共享块，并将它们捆绑在一个单独的块中，类似于供应商块
     new webpack.optimize.CommonsChunkPlugin({
       name: 'app',
       async: 'vendor-async',

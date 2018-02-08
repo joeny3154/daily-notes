@@ -5,7 +5,7 @@ No Match （没有路径匹配）
 
 eg: 
 
-```
+``` jsx
 const NoMatchExample = () => (
   <Router>
     <div>

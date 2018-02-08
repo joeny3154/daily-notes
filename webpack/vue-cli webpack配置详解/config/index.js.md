@@ -30,6 +30,7 @@ module.exports = {
     useEslint: true,
     // If true, eslint errors and warnings will also be shown in the error overlay
     // in the browser.
+    // 此项用来设置是否把错误显示在浏览器console中
     showEslintErrorsInOverlay: false,
 
     /**

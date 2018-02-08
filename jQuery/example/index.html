@@ -41,8 +41,8 @@
   </style>
 </head>
 <body>
-  <div class="s"></div>
-  <div class="s"></div>
+  <div class="s v"></div>
+  <div class="s test"></div>
   <button class="scroll-top">get scrollTop</button>
   <button class="scroll-left">get scrollLeft</button>
   <div class="wrap">
@@ -77,6 +77,8 @@
   <div class="s"></div>
   <script src="./jquery-3.2.1.min.js"></script>
   <script>
+    $('.v').css('visibility', 'visible').hide()
+    console.log('111', $('.test').prev('.v'))
     var $elem = $('#div')
     $('.scroll-top').click(function () {
       console.log('scrollTop=>', $elem.scrollTop())
