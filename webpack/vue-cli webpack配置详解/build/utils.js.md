@@ -67,16 +67,45 @@ exports.cssLoaders = function (options) {
     css: generateLoaders(),
     postcss: generateLoaders(),
     less: generateLoaders('less'),
-    // eg: [
-    // { loader: 'css-loader', options: { sourceMap: true/false } },
-    // { loader: 'postcss-loader', options: { sourceMap: true/false } },
-    // { loader: 'less-loader', options: { sourceMap: true/false } },
-    // ]
     sass: generateLoaders('sass', { indentedSyntax: true }),
     scss: generateLoaders('sass'),
     stylus: generateLoaders('stylus'),
     styl: generateLoaders('stylus')
   }
+  /*
+  返回如下内容：
+  {
+    css: ['vue-style-loader',
+      { loader: 'css-loader', options: { sourceMap: true/false } }
+    ],
+    postcss: ['vue-style-loader',
+      { loader: 'css-loader', options: { sourceMap: true/false } }
+    ],
+    less: ['vue-style-loader',
+      { loader: 'css-loader', options: { sourceMap: true/false } },
+      { loader: 'less-loader', options: { sourceMap: true/false } }
+    ],
+    sass: ['vue-style-loader',
+      { loader: 'css-loader', options: { sourceMap: true/false } },
+      {
+        loader: 'sass-loader',
+        options: { indentedSyntax: true, sourceMap: true/false }
+      }
+    ],
+    scss: ['vue-style-loader',
+      { loader: 'css-loader', options: { sourceMap: true/false } },
+      { loader: 'sass-loader', options: { sourceMap: true/false } }
+    ],
+    stylus: ['vue-style-loader',
+      { loader: 'css-loader', options: { sourceMap: true/false } },
+      { loader: 'stylus-loader', options: { sourceMap: true/false } }
+    ],
+    styl: ['vue-style-loader',
+      { loader: 'css-loader', options: { sourceMap: true/false } },
+      { loader: 'stylus-loader', options: { sourceMap: true/false } }
+    ]
+  }
+  */
 }
 
 // Generate loaders for standalone style files (outside of .vue)
@@ -91,17 +120,101 @@ exports.styleLoaders = function (options) {
       test: new RegExp('\\.' + extension + '$'),
       use: loader
     })
-    // eg:
-    // {
-    //   test: new RegExp(\\.less$),
-    //   use: {
-    //     loader: 'less-loader', options: { sourceMap: true/false }
-    //   }
-    // }
   }
 
   return output
 }
+
+/*
+styleLoaders({
+  sourceMap: config.build.productionSourceMap, // true
+  extract: true,
+  usePostCSS: true
+}) = [
+  {
+    test: /\.css$/,
+    use:
+      [{
+        loader: '/Users/wanjun/Desktop/demo/vue-doc/node_modules/extract-text-webpack-plugin/dist/loader.js',
+        options: { omit: 1, remove: true }
+      },
+      { loader: 'vue-style-loader' },
+      { loader: 'css-loader', options: { sourceMap: true } },
+      { loader: 'postcss-loader', options: { sourceMap: true } }]
+  },
+  {
+    test: /\.postcss$/,
+    use:
+      [{
+        loader: '/Users/wanjun/Desktop/demo/vue-doc/node_modules/extract-text-webpack-plugin/dist/loader.js',
+        options: { omit: 1, remove: true }
+      },
+      { loader: 'vue-style-loader' },
+      { loader: 'css-loader', options: { sourceMap: true } },
+      { loader: 'postcss-loader', options: { sourceMap: true } }]
+  },
+  {
+    test: /\.less$/,
+    use:
+      [{
+        loader: '/Users/wanjun/Desktop/demo/vue-doc/node_modules/extract-text-webpack-plugin/dist/loader.js',
+        options: { omit: 1, remove: true }
+      },
+      { loader: 'vue-style-loader' },
+      { loader: 'css-loader', options: { sourceMap: true } },
+      { loader: 'postcss-loader', options: { sourceMap: true } },
+      { loader: 'less-loader', options: { sourceMap: true } }]
+  },
+  {
+    test: /\.sass$/,
+    use:
+      [{
+        loader: '/Users/wanjun/Desktop/demo/vue-doc/node_modules/extract-text-webpack-plugin/dist/loader.js',
+        options: { omit: 1, remove: true }
+      },
+      { loader: 'vue-style-loader' },
+      { loader: 'css-loader', options: { sourceMap: true } },
+      { loader: 'postcss-loader', options: { sourceMap: true } },
+      { loader: 'sass-loader', options: { indentedSyntax: true, sourceMap: true } }]
+  },
+  {
+    test: /\.scss$/,
+    use:
+      [{
+        loader: '/Users/wanjun/Desktop/demo/vue-doc/node_modules/extract-text-webpack-plugin/dist/loader.js',
+        options: { omit: 1, remove: true }
+      },
+      { loader: 'vue-style-loader' },
+      { loader: 'css-loader', options: { sourceMap: true } },
+      { loader: 'postcss-loader', options: { sourceMap: true } },
+      { loader: 'sass-loader', options: { sourceMap: true } }]
+  },
+  {
+    test: /\.stylus$/,
+    use:
+      [{
+        loader: '/Users/wanjun/Desktop/demo/vue-doc/node_modules/extract-text-webpack-plugin/dist/loader.js',
+        options: { omit: 1, remove: true }
+      },
+      { loader: 'vue-style-loader' },
+      { loader: 'css-loader', options: { sourceMap: true } },
+      { loader: 'postcss-loader', options: { sourceMap: true } },
+      { loader: 'stylus-loader', options: { sourceMap: true } }]
+  },
+  {
+    test: /\.styl$/,
+    use:
+      [{
+        loader: '/Users/wanjun/Desktop/demo/vue-doc/node_modules/extract-text-webpack-plugin/dist/loader.js',
+        options: { omit: 1, remove: true }
+      },
+      { loader: 'vue-style-loader' },
+      { loader: 'css-loader', options: { sourceMap: true } },
+      { loader: 'postcss-loader', options: { sourceMap: true } },
+      { loader: 'stylus-loader', options: { sourceMap: true } }]
+  }
+]
+*/
 
 exports.createNotifierCallback = () => {
   // 发送跨平台通知系统, 基本用法：notifier.notify('message')
