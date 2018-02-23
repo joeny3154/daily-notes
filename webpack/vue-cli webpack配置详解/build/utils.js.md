@@ -10,7 +10,8 @@ exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
     ? config.build.assetsSubDirectory
     : config.dev.assetsSubDirectory
-  // posix方法修正路径分隔符
+  // `path.posix` 属性提供了 path 方法针对 POSIX 的实现
+  // http://nodejs.cn/api/path.html#path_path_delimiter
   return path.posix.join(assetsSubDirectory, _path)
 }
 // 示例： ({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
@@ -51,6 +52,7 @@ exports.cssLoaders = function (options) {
     // (which is the case during production build)
     // 生产模式中提取css， 如果 options 中的 extract 为 true 配合生产模式
     if (options.extract) {
+      // loaders: [ { loader: 'css-loader', options: { sourceMap: false } },{ loader: 'postcss-loader', options: { sourceMap: false } } ]
       return ExtractTextPlugin.extract({
         use: loaders,
         // 默认使用 vue-style-loader
@@ -130,7 +132,25 @@ styleLoaders({
   sourceMap: config.build.productionSourceMap, // true
   extract: true,
   usePostCSS: true
-}) = [
+})
+extract 为 false
+
+[
+  {
+    test: /\.css$/,
+    use:[
+      {
+        loader: '/Users/wanjun/Desktop/demo/vue-doc/node_modules/extract-text-webpack-plugin/dist/loader.js',
+        options: { omit: 1, remove: true }
+      },
+      { loader: 'vue-style-loader' },
+      { loader: 'css-loader', options: { sourceMap: true } },
+      { loader: 'postcss-loader', options: { sourceMap: true } }
+    ]
+  },
+]
+extract 为true
+[
   {
     test: /\.css$/,
     use:

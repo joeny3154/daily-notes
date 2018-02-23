@@ -1,12 +1,21 @@
-var http = require('http')
+// var http = require('http')
+const fetch = require('isomorphic-fetch')
 
-module.exports = (url = 'http://www.baidu.com/') => new Promise((resolve, reject) => {
-  let _c = {}, _range = ['a'.charCodeAt(), 'z'.charCodeAt()]
-  for(let i = _range[0]; i <= _range[1]; i ++){
-    _c[String.fromCharCode(i)] = 0
-  }
-  http.get(url, res => {
-    res.on('data', data => `${data}`.replace(/[a-z]/ig, i => _c[i.toLowerCase()] ++))
-    res.on('end', () => resolve(_c))
-  })
-})
+module.exports = (url = 'http://www.baidu.com/') => {
+  return fetch(url)
+    .then( response => response.text())
+    .then( html => {
+      // console.time('ms')
+      let _c = 'abcdefghijklmnopqrstuvwxyz'.split('').reduce((a, b) => (a[b] = 0, a), {})
+      for(let i = 0, l = html.length; i < l; i ++){
+          let l = html[i], c = l.charCodeAt(0)
+          if ( c >= 97 && c <= 122 ){
+            _c[l] += 1
+          }else if(c >= 65 && c <= 90){
+            _c[l.toLowerCase()] += 1
+          }
+      }
+      // console.timeEnd('ms')
+      return _c
+    })
+}
