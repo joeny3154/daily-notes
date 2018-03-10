@@ -7,6 +7,8 @@
 
 # 原生js
 
+![原生js获取各种位置、尺寸信息](./images/wh.png)
+
 ```js
 document.body.clientWidth // 网页可见区域宽[仅针对body]
 document.body.clientHeight // 网页可见区域高[仅针对body]
@@ -68,8 +70,11 @@ $(document.body).width() // 浏览器当前窗口文档body的宽度
 $(document.body).outerHeight(true) // 浏览器当前窗口文档body的总高度 包括border padding margin
 $(document.body).outerWidth(true)) // 浏览器当前窗口文档body的总宽度 包括border padding margin
 
+
 $(selector).height() // content高度
 $(selector).width() // content宽度
+// zepto.js 的 width()、height() = border + padding + content
+
 $(selector).innerHeight() // content + padding
 $(selector).innerWidth() //content + padding
 $(selector).outerHeight() // content + padding + border
@@ -81,8 +86,8 @@ $(selector).offset() & $(selector).offset({top: y, left: x}) // 返回或设置�
 $(selector).offset().top // 匹配元素相对于文档顶端的偏移(位置)
 $(selector).offset().left // 匹配元素相对于文档左边的偏移(位置)
 
-$(selector).position().top // 匹配元素与最接近的且绝对定位（`position: relative`）的父元素的相对顶端偏移
-$(selector).position().left // 匹配元素与最接近的且绝对定位（`position: relative`）的父元素的相对左边偏移
+$(selector).position().top // 匹配元素与最接近的且相对定位（`position: relative`）的父元素的相对顶端偏移
+$(selector).position().left // 匹配元素与最接近的且相对定位（`position: relative`）的父元素的相对左边偏移
 
 $(selector).scrollTop() & $(selector).scrollTop(y) // 返回或设置匹配 元素的滚动条 的垂直位置
 $(selector).scrollLeft() & $(selector).scrollLeft(x) // 返回或设置匹配 元素的滚动条 的水平位置
@@ -92,3 +97,5 @@ $(selector).scrollLeft() & $(selector).scrollLeft(x) // 返回或设置匹配 �
 
 1、zepto.js 没有 `innerHeight()`、`outerHeight()` 方法
 2、zepto.js: `$(selector).height() = border + padding + content`
+
+获取`padding`: `$(selector).css('padding-top')`、`$(selector).css('padding-left')`、`$(selector).css('padding-right')` .....

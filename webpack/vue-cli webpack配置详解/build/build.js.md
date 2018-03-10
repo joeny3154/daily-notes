@@ -10,7 +10,7 @@ const ora = require('ora')
 // 删除文件 'rm -rf'
 const rm = require('rimraf')
 const path = require('path')
-// stdout颜色设置
+// stdout颜色设置, stdout意思是标准输出
 const chalk = require('chalk')
 const webpack = require('webpack')
 const config = require('../config')
@@ -21,21 +21,28 @@ spinner.start()
 // 清空文件夹
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   if (err) throw err
-  // 删除完成回调函数内执行编译
   webpack(webpackConfig, (err, stats) => {
+    // 编译错误不在 err 对象内，而是需要使用 stats.hasErrors() 单独处理， err 对象只会包含 webpack 相关的问题，比如配置错误等
+    // 完备的错误处理中需要考虑以下三种类型的错误： 1. 致命的 wepback 错误（配置出错等）2. 编译错误（缺失的 module，语法错误等）3. 编译警告
+    // 查看完备的webpack 错误处理可查看：https://doc.webpack-china.org/api/node#stats-tojson-options-
     spinner.stop()
     if (err) throw err
     // 编译完成，输出编译文件
+    // stats 能让你准确地控制显示哪些包的信息
+    // stats.toString：以格式化的字符串形式返回描述编译信息（类似 CLI 的输出）
+    // stats.toString 所有配置选项可查看这里：https://doc.webpack-china.org/configuration/stats
     process.stdout.write(stats.toString({
-      colors: true,
-      modules: false,
-      children: false,
-      chunks: false,
-      chunkModules: false
+      colors: true, // 在控制台展示颜色
+      modules: false, // 增加内置的模块信息
+      children: false, // 增加子级的信息
+      chunks: false, // 使构建过程更静默无输出
+      chunkModules: false // 将内置模块信息增加到包信息
     }) + '\n\n')
-    // error
+    // 出现编译错误：编译错误不在 err 对象内，而是需要使用 stats.hasErrors() 单独处理， err 对象只会包含 webpack 相关的问题，比如配置错误等
     if (stats.hasErrors()) {
       console.log(chalk.red('  Build failed with errors.\n'))
+      // process.exit()方法以结束状态码code指示Node.js同步终止进程。
+      // 'failure'状态码: 1
       process.exit(1)
     }
     // 完成

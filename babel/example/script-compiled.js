@@ -1,0 +1,2 @@
+// 编译前
+console.log(Object.values({ 1: 2 }));

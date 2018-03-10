@@ -26,6 +26,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   devtool: config.dev.devtool,
 
   // these devServer options should be customized in /config/index.js
+  // 这些devServer选项应该在/config/index.js中定制
   devServer: {
     // devServer.contentBase: 默认情况下，将使用当前工作目录作为提供内容的目录，devServer.publicPath 将用于确定应该从哪里提供 bundle，并且此选项优先
     // 你可以修改为其他目录,eg: contentBase: path.join(__dirname, "public");
@@ -87,6 +88,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // 当开启 HMR 的时候使用该插件会显示模块的相对路径，建议用于开发环境。
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
     // 在输出阶段时，遇到编译错误跳过
+    // 在编译出现错误时，使用 NoEmitOnErrorsPlugin 来跳过输出阶段。这样可以确保输出资源不会包含错误。对于所有资源，统计资料(stat)的 emitted 标识都是 false
+    // 此插件用于取代（现已弃用）webpack 1 的 NoErrorsPlugin 插件。
+    // 如果你在使用 CLI(命令行界面command-line interface)，启用此插件后，webpack 进程遇到错误代码将不会退出。
     new webpack.NoEmitOnErrorsPlugin(), 
     // https://github.com/ampedandwired/html-webpack-plugin
     /*
@@ -107,6 +111,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 module.exports = new Promise((resolve, reject) => {
   // 获取当前设定的端口
   portfinder.basePort = process.env.PORT || config.dev.port
+  // 如果当前设定的端口被占用自动检索下一个可用端口
   portfinder.getPort((err, port) => {
     if (err) {
       reject(err)
