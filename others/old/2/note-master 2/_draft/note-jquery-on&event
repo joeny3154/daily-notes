@@ -1,0 +1,4 @@
+jQuery on 绑定的事件触发多次
+$('#btnBind').off('click').on('click',function () {
+    alert(123);
+});

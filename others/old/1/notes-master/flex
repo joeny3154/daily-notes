@@ -1,0 +1,76 @@
+Flex混合划分
+	
+不定宽高的水平垂直居中
+	.moff-wapper{
+		position: absolute;
+		top:50%;
+		left:50%;
+		z-index:3;
+		-webkit-transform:translate(-50%,-50%);
+	}
+	.parent{
+		justify-content: center;子元素水平居中
+		align-items: center;//子元素垂直居中
+		display: -webkit-flex;
+	}
+
+	
+	flex-direction:row;//默认方向
+	flex-direction:row-reverse;//反向（横向）
+
+	flex-direction：column;//百分百占比，但是纵向排列
+	flex-direction：column-reverse;//但是纵向排列
+
+	-webkit-flex-wrap:nowrap;//子元素不会被换行
+	width:400px(父容器)
+	子元素超出400也不会溢出。
+	比如三个子元素是100；200；300px；还是按照1:2:3划分，但是实际宽度改变
+
+	-webkit-flex-wrap:wrap;正常
+
+	-webkit-flex-wrap:wrap-reverse;反方向
+
+
+	display: flex;	display: -webkit-flex; /* Safari */
+	display: inline-flex;	display: -webkit-inline-flex; /* Safari */
+	设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。
+来源：
+	http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html
+容器属性：
+	1.flex-direction: 项目的排列方向
+		row | row-reverse | column | column-reverse;
+	2.flex-wrap：如果一条轴线排不下，如何换行
+		nowrap（默认）：不换行。
+		wrap：换行，第一行在上方。
+		wrap-reverse：换行，第一行在下方。
+	3.flex-flow：
+		flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。
+		flex-flow: <flex-direction> || <flex-wrap>;
+	4.justify-content:项目在主轴上的对齐方式。
+		flex-start（默认值）：左对齐
+		flex-end：右对齐
+		center： 居中
+		space-between：两端对齐，项目之间的间隔都相等。
+		space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。
+	5.align-items：项目在交叉轴上如何对齐。
+		flex-start：交叉轴的起点对齐。
+		flex-end：交叉轴的终点对齐。
+		center：交叉轴的中点对齐。
+		baseline: 项目的第一行文字的基线对齐。
+		stretch（默认值）：如果项目未设置高度或设为auto（或minheight），将占满整个容器的高度。
+	6.align-content：多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。
+		flex-start：与交叉轴的起点对齐。
+		flex-end：与交叉轴的终点对齐。
+		center：与交叉轴的中点对齐。
+		space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。
+		space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。
+		stretch（默认值）：轴线占满整个交叉轴。
+
+项目的属性：
+	1.order：定义项目的排列顺序。数值越小，排列越靠前，默认为0。
+	2.flex-grow：定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。
+	3.flex-shrink:定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。
+	4.flex-basis：定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。
+	5.flex：是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。
+	6.align-self：允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
+		align-self: auto | flex-start | flex-end | center | baseline | stretch;

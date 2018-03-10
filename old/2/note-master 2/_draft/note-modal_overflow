@@ -1,5 +1,0 @@
-模态框超出问题
-.modal-open .modal{
-	overflow-x:hidden;
-	overflow-y:auto
-}

@@ -2,8 +2,6 @@
 编写jQuery插件
 ======
 
-https://gist.github.com/quexer/3619237
-
 要编写一个 jQuery 插件，需要为 jQuery.fn 对象增加一个新的函数属性，属性名就是插件的名字
 
 # 上下文
@@ -162,11 +160,9 @@ $('div').tooltip({
   foo : 'bar'
 });
 
---
 // 调用 hide 方法
 $('div').tooltip('hide'); 
 
---
 // 调用 update 方法
 $('div').tooltip('update', 'This is the new tooltip content!');
 ```
@@ -294,3 +290,6 @@ eg:
 
 })( jQuery );
 ```
+
+
+https://gist.github.com/quexer/3619237

@@ -1,0 +1,13 @@
+
+
+vue:
+	https://github.com/vuejs/vue-syntax-highlight
+	Package Control: search for Vue Syntax Highlight:
+		Vue Syntax Highlight
+
+html-css-js 格式化：
+	https://github.com/victorporof/Sublime-HTMLPrettify
+	配置规则：
+
+	需要配置node.exe path路径
+		c+s+H

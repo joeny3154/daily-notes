@@ -1,0 +1,20 @@
+https://github.com/yutingzhao1991/blog/issues/4
+2015回顾：如何选择前端开发模式:
+
+1.是否需要使用后端渲染的模板？
+
+2.如何选择jquery这样的类库，是否需要自己开发一个类库？
+
+3.框架的选择
+	第一类是大量表单处理的应用台类的应用，推荐使用angular或者vuejs。
+	另一类是应用型的web应用，这一类我认为组件化是关键。所以应该选择对组件化支持比较好的react，polymer，vuejs来开发。
+
+	这两类我暂时叫做表单型和应用型
+
+4.UI应该怎么处理，bootstrap？jqueryui？怎么样规划自己的UI库？
+	所谓组件化那自然是对样式的隔离和共享的要求比较高，所以还是最好能够采用css-modules或者shaly dom等组件化样式的解决方案
+
+5.模块怎么管理？模块加载器，构建工具，上线方案？seajs ？ requirejs ？grunt ？
+	webpack+npm已经是主流了，构建工具可以再假设gulp
+
+6.设计模式？MVC? MVVM?

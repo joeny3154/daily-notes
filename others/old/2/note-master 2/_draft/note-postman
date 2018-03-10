@@ -1,0 +1,11 @@
+https://gold.xitu.io/entry/57597a62a341310061337885
+1.简介：
+
+2.请求：
+	HTTP请求的4部分:URL，请求的method，headers，body。 
+	
+	URL
+	cookies
+	Method：
+	Request body：
+		mutipart/form-data是网页表单用来传输数据的默认格式。可以模拟填写表单，并且提交表单。

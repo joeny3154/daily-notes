@@ -1,0 +1,92 @@
+1.加载 JavaScript 文件
+	baseUrl:
+		一般设置到与该属性相一致的目录。下列示例中展示了baseUrl的设置：
+	<script data-main="scripts/main.js" src="scripts/require.js"></script>
+
+	手动设置：
+		如果没有显式指定config及data-main，则默认baseUrl为包含RequireJS的那个HTML页面的所属目录
+
+		如果一个module ID符合下述规则之一，其ID解析会避开"baseUrl + paths"配置，而直接将其加载为一个相对于当前HTML文档的脚本：
+			以 ".js" 结束.
+			以 "/" 开始.
+			包含 URL 协议, 如 "http:" or "https:".
+
+2.data-main 入口点
+		<script data-main="scripts/main" src="scripts/require.js"></script>
+		注意：你在main.js中所设置的脚本是异步加载的。不能保证同页面的依赖JS已经加载成功。
+
+3.定义模块：
+	3.1 简单的值对:
+		define({
+			color:'black',
+			size:'unsize'
+		})
+
+	3.2 函数式定义
+		define(function(){
+			return {
+				color:"black",
+				size:'unsize'
+			}
+		})
+	3.3 存在依赖的函数式定义
+		如果模块存在依赖：第一个参数是依赖的名称数组；第二个参数是函数
+		define(['./cart','./inventory'],function(cart,inventory){
+			return {
+				color:'black',
+				size:'large',
+				addToCart:function(){
+					inventory.decrement(this);
+					cart.add(this)
+				}
+			}
+		})
+
+		注意：函参的顺序应与依赖顺序保存一致。
+	4.3 将模块定义为一个函数
+		对模块的返回值类型并没有强制为一定是个object，任何函数的返回值都是允许的。
+		此处是一个返回了函数的模块定义：
+
+			define(['my/cart','my/inventory'],function(cart,inventory){
+				return function(title){
+					return title?(window.title=title) :
+						inventory.storeName+" "+cart.name;
+				}
+			})
+	4.4 简单包装CommonJS来定义模块
+		？？？？？？？？？？？？
+
+	4.5 定义一个命名模块
+		模块名称作为首个参数
+		define('foo/title',['my/cart','my/inventory'],function(cart,inventory){
+			
+		})
+
+	4.6 其他注意事项
+		1.一个文件一个模块: 每个Javascript文件应该只定义一个模块，这是模块名-至-文件名查找机制的自然要求。
+		多个模块会被优化工具组织优化，但你在使用优化工具时应将多个模块放置到一个文件中。
+
+		2.define()中的相对模块名: 为了可以在define()内部使用诸如require("./relative/name")的调用以正确解析相对名称，记得将"require"本身作为一个依赖注入到模块中
+			define(['require','./relative/name'],function(require){
+				var mod =require('./relative/name')
+			})
+		3.生成相对于模块的URL地址: 
+			define(["require"], function(require) {
+			    var cssUrl = require.toUrl("./style.css");
+			});
+		4.控制台调试:
+			？？？？？？？？？？？？？？？
+			require("module/name").callSomeFunction()
+		5.循环依赖
+			？？？？？？？？？？？
+		6.JSONP服务依赖
+			？？？？？？？？？
+		7.Undefining a Module
+2.机制
+
+3.配置选配
+
+	支持的配置项：
+		1.baseUrl : 所有模块的查找根路径。
+		2.paths : path映射那些不直接放置于baseUrl下的模块名。
+		3.shim: 为那些没有使用define()来声明依赖关系、设置模块的"浏览器全局变量注入"型脚本做依赖和导出配置。

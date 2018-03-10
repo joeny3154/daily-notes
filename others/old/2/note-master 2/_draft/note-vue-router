@@ -1,0 +1,12 @@
+安装：
+	npm install vue-router
+
+	Dev Build
+		GitHub clone 然后自己构建：
+				git clone https://github.com/vuejs/vue-router.git node_modules/vue-router
+				cd node_modules/vue-router
+				npm install
+				npm run build
+
+基本用法:
+		使用 vue-router 时，我们需要做的就是把路由映射到各个组件，vue-router 会把各个组件渲染到正确的地方

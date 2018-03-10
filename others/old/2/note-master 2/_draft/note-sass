@@ -1,0 +1,38 @@
+http://www.ruanyifeng.com/blog/2012/06/sass.html
+
+SASS是Ruby语言写的，但是两者的语法没有关系。不懂Ruby，照样使用。只是必须先安装Ruby，然后再安装SASS。
+	
+	安装 Ruby 的方法:
+		http://www.ruby-lang.org/zh_cn/downloads/
+		windows 安装
+		http://rubyinstaller.org/
+	安装SASS
+		gem install sass
+
+	使用：
+		乱码问题：
+			scss顶部加上：@charset "UTF-8";，再进行编译。
+
+		编译：
+			四个编译风格的选项：
+					* nested：嵌套缩进的css代码，它是默认值。
+			　　* expanded：没有缩进的、扩展的css代码。
+			　　* compact：简洁格式的css代码。
+			　　* compressed：压缩后的css代码。
+
+				生产环境当中，一般使用最后一个选项：
+					sass --style compressed test.sass test.css
+
+			监听：
+				监听文件：
+					sass --watch input.scss:output.css
+
+				监听文件夹：
+					sass --watch app/sass:public/stylesheets
+
+				在线转换器：（官网提供）
+					http://sass-lang.com/try.html
+
+		语法：
+
+

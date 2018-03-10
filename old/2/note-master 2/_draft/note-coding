@@ -1,8 +1,0 @@
-git clone git@git.coding.net:Rov/vue-demo.git 克隆
-
-git add .
-git commit -m '...' 
-git push
-
-git fetceh 更新
-git merge 合并

@@ -1,0 +1,68 @@
+Object 对象与继承
+
+1.Object.getOwnPropertyNames()
+	返回一个数组，成员是对象本身的所有属性的键名，不包含继承的属性键名。
+
+	Object.getOwnPropertyNames(Date)
+	// ["parse", "arguments", "UTC", "caller", "name", "prototype", "now", "length"]
+		返回所有键名：里面包含可以枚举的（enumerable），和不可以枚举
+
+	//只获取那些可以枚举的属性，使用Object.keys方法
+
+2.Object.prototype.hasOwnProperty()
+	返回一个布尔值，用于判断某个属性定义在对象自身，还是定义在原型链上。
+	hasOwnProperty方法是JavaScript之中唯一一个处理对象属性时，不会遍历原型链的方法。
+
+3.in 运算符和 for…in 循环
+	in运算符返回一个布尔值，表示一个对象是否具有某个属性，不区分该属性是对象自身的属性，还是继承的。
+	'length' in Date;	//true
+	'toString' in Date;	//true
+
+	得对象的所有可枚举属性（不管是自身的还是继承的），可以使用for...in循环:
+		var o1={p1:123};
+		var o2=Object.create(o1,{p2:{value:'abc',enumerable:true}})
+		for(p in o2){console.log(p)}
+
+	for...in
+		for ( var name in object ) {
+		  if ( object.hasOwnProperty(name) ) {
+		    /* loop code */
+		  }
+		}
+
+	获得对象的所有属性（不管是自身的还是继承的，以及是否可枚举），可以使用下面的函数。
+		function inheritedPropertyNames(obj) {
+		  var props = {};
+		  while(obj) {
+		    Object.getOwnPropertyNames(obj).forEach(function(p) {
+		      props[p] = true;
+		    });
+		    obj = Object.getPrototypeOf(obj);
+		  }
+		  return Object.getOwnPropertyNames(props);
+		}
+
+4.对象的拷贝
+	需要做到下面两件事情:
+		确保拷贝后的对象，与原对象具有同样的prototype原型对象。
+		确保拷贝后的对象，与原对象具有同样的属性。
+
+			function copyObject(orig) {
+				//获取原型
+			  var copy = Object.create(Object.getPrototypeOf(orig));
+			  copyOwnPropertiesFrom(copy, orig);
+			  return copy;
+			}
+
+			function copyOwnPropertiesFrom(target, source) {
+			  Object
+			  .getOwnPropertyNames(source)
+			  .forEach(function(propKey) {
+			  		//返回指定对象上一个自有属性对应的属性描述符
+			    var desc = Object.getOwnPropertyDescriptor(source, propKey);
+			    //直接在一个对象上定义一个新属性，或者修改一个已经存在的属性， 并返回这个对象。
+			    //语法：Object.defineProperty(obj, prop, descriptor)
+			    Object.defineProperty(target, propKey, desc);
+			  });
+			  return target;
+			}
