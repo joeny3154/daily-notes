@@ -1,0 +1,1 @@
+const obj = Object.assign(obj, { age: 30 })

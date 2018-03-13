@@ -1,7 +1,7 @@
 babel-node
 ===== 
 
-也是 babel-cli 下面的一个 command，主要是实现了 node **执行脚本**和**命令行写代码**的能力。举两个栗子就清楚了。
+也是 babel-cli 下面的一个 command，主要是实现了 node **执行脚本**和**命令行写代码**的能力。eg:
 
 1. 执行脚本
 
@@ -29,6 +29,7 @@ node jsx.js // SyntaxError: Unexpected token <
 ```
 node_modules/.bin/babel-node --presets react jsx.js
 ```
+node_modules/.bin/babel script.js --out-file script-compiled.js --plugins=transform-runtime
 
 `--presets react` 是参数，等同于
 
@@ -50,7 +51,7 @@ node_modules/.bin/babel-node --presets react jsx.js
 
 ![babel-node](./images/babel-node.jpeg)
 
-通过示例基本已经介绍了 `babel-node` 的用法了，就是方便我们平常开发时候，写一些脚本的。所以它不适用于生产环境。另外，`babel-node` 已经内置了 polyfill，并依赖 `babel-register` 来编译脚本。好，那 `babel-register` 是什么呢?
+`babel-node` 可以方便我们平常开发时写一些脚本。所以它不适用于生产环境。另外，`babel-node` 已经内置了 polyfill，并依赖 `babel-register` 来编译脚本。
 
 # [babel-register](./babel-register.md)
 

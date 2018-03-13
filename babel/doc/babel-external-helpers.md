@@ -1,37 +1,33 @@
 babel-external-helpers
 =======
 
-babel-cli 中的一个`command`(命令)，用来生成一段代码，包含 babel 所有的 helper 函数。
-
+`babel-cli` 中的一个`command`(命令)，用来生成一段代码，包含 babel 所有的 helper 函数。
 
 # 什么是 helpers?
 
-`babel` 有很多帮助函数，例如 toArray函数， jsx转化函数。这些函数是 `babel transform` 的时候用的，都放在 `babel-helpers`这个包中。
-如果 babe 编译的时候检测到某个文件需要这些 helpers，在编译成模块的时候，会放到模块的顶部。eg:
+Babel 转译后的代码要实现源代码同样的功能需要借助一些帮助函数，例如: `{ [name]: 'JavaScript' }` 转译后的代码如下所示：
 
 ``` js
-(function(module, exports, __webpack_require__) {
-
-function _asyncToGenerator(fn) { return function () {  }; } // 模块顶部定义 helper
-
-// some code 
-// async 语法已经被 transform-async-to-generator 转化，再利用 helper 函数包装，消费 generator。
-const func = (() => {
-  var _ref = _asyncToGenerator(function* () {
-    console.log('begin');
-    yield new Promise(function (resolve) {
-      setTimeout(function () {
-        resolve();
-      }, 1000);
+'use strict';
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
     });
-    console.log('done');
-  });
-})
-
-})
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+var obj = _defineProperty({}, 'name', 'JavaScript');
 ```
 
-但是如果多个文件都需要提供，会重复引用这些 `helpers`，会导致每一个模块都定义一份，代码冗余。所以 babel 提供了这个命令，用于生成一个包含了所有 helpers 的 js 文件，用于直接引用。然后再通过一个 `plugin`，去检测全局下是否存在这个模块，存在就不需要重新定义了。
+类似上面的`_defineProperty`就是一个帮助函数, `_defineProperty` 可能会重复出现在一些模块里，会导致每一个模块都定义一份, 导致编译后的代码体积变大。
+
+所以 babel 提供了这个命令，用于生成一个包含了所有 helpers 的 js 文件，用于直接引用。然后再通过一个 `plugin`去检测是否存在这个模块，存在就不需要重新定义了。
 
 # 使用：
 
@@ -45,7 +41,7 @@ const func = (() => {
 
 `npm install --save-dev babel-plugin-external-helpers`
 
-3. 然后在 babel 的配置文件加入
+3. 然后在 babel 的配置文件加入`external-helpers`插件
 
 ``` js
 {
@@ -55,4 +51,10 @@ const func = (() => {
 
 4. 入口文件引入 `helpers.js`
 
-这样就可以啦，还是可以减少很多代码量的。另外如果使用了 `transform-runtime`，就不需要生成 `helpers.js` 文件了，这个在后面的 `babel-runtime` 再说。
+``` js
+require('./helpers.js');
+```
+
+如此可以减少很多代码量的。
+
+*tip*: 使用 `transform-runtime`就不需要生成 `helpers.js` 文件了，详见[babel-runtime](./babel-runtime.md)。

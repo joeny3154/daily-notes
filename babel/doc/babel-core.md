@@ -49,7 +49,7 @@ console.log(result, 'res');
 
 - `babel.transformFromAst(ast: Object, code?: string, options?: Object)`
 
-反转，你把 ast 传入，解析为 code 代码。
+ast 传入，解析为 code 代码。
 
 # [options](https://github.com/babel/babel/tree/master/packages/babel-core)
 

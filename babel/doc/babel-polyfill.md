@@ -2,15 +2,18 @@
 babel-polyfill
 =====
 
-`npm install babel-polyfill --save`
-
-`babel-polyfill` 是为了模拟一个完整的ES2015 +环境，旨在用于应用程序而不是库/工具。
-
-也就是说，它会让我们程序的执行环境，模拟成完美支持 es6+ 的环境，毕竟无论是浏览器环境还是 node 环境对 es6+ 的支持都不一样。它是以重载全局变量 （E.g: Promise）,还有原型和类上的静态方法（E.g：Array.prototype.reduce/Array.form），从而达到对 es6+ 的支持。不同于 babel-runtime 的是，babel-polyfill 是一次性引入你的项目中的，就像是 React 包一样，同项目代码一起编译到生产环境。
+使用它之后意味着你可以使用 `built-ins` (eg: Promise、WeakMap), 静态方法（eg: Array.from、Object.assign), 实例方法（eg: Array.prototype.includes), 和 generator functions。
 
 # 使用
 
-结合 babel-register 去使用一下
+`npm install babel-polyfill --save`
+
+因为这是一个polyfill（它会在源代码之前运行），所以我们需要它是一个`dependency`，而不是一个`devDependency`
+
+`babel-polyfill` 是为了模拟一个完整的ES2015 +环境，意图是用于应用程序，而不是库(library)/工具(tool)。
+
+
+eg: 结合 babel-register
 
 ``` js
 // index.js
@@ -38,3 +41,22 @@ $ node index.js
 ```
 
 注意：`babel-polyfill` 只是为当前环境全局下注入垫片，ES6 语法（E.g: arrow func，esModules）还是要加入 `plugins` 去 transform 的
+
+
+# 在Node / Browserify / Webpack中的用法
+
+要包含polyfill，您需要将它填入应用程序入口点的顶部， 确保在所有其他代码/需要语句之前调用它。
+
+使用`webpack.config.js`时，添加`babel-polyfill`到`entry`数组中：
+
+``` js
+module.exports = {
+  entry: ["babel-polyfill", "./app/js"]
+};
+```
+
+# 浏览器中的使用
+
+可从npm版本的`dist/polyfill.js`文件中获得`babel-polyfill`。这需要包含在所有编译的Babel代码之前。您可以将其预先加入到您的编译代码中，或者将其包含在<script>之前的代码中。
+
+如果你用于工具/库(tool/library), 并且不会修改全局变量, 请选择`transform-runtime`插件。但你将无法使用上面提到的实例方法, 如`Array.prototype.includes`。
