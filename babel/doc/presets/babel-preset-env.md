@@ -72,7 +72,7 @@ console.log(Array.isArray([]));
 
 **step2**: 然后通过设置不同的参数，打包，获取 build.js，并执行。得到下表
 
-![useBuiltIns不同设置对照表](./images/babel-preset-env.jpeg)
+![useBuiltIns不同设置对照表](../images/babel-preset-env.jpeg)
 
 **step3**: 然后... 我又试了一下 env 下，使用 transform-runtime。在不加 useBuiltIns，不引入 babel-polyfill 的情况下。build.js 体积234k，执行通过。
 
@@ -112,3 +112,7 @@ Using polyfills:
   es6.typed.int16-array {"android":"4.4.3","ie":"10","safari":"7","node":"4.8.4"}
   ...
 ```
+
+# 具体使用
+
+[[译]babel-preset-env](https://icyfish.me/2017/05/18/babel-preset-env/)

@@ -35,8 +35,6 @@ var obj = _defineProperty({}, 'name', 'JavaScript');
 
 `node_modules/.bin/babel-external-helpers > helpers.js`
 
-注意：示例代码的包都是装到项目中的，也就是本地。同样你可以全局安装直接执行。
-
 2. 安装 plugin
 
 `npm install --save-dev babel-plugin-external-helpers`
