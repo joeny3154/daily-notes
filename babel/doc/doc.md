@@ -11,9 +11,9 @@ babel 知识梳理
 
 - 增加了`.babelrc` 文件，方便自定义的配置。
 
-### [babel-core](./babel-cli.md)
+### [babel-core](./babel-core.md)
 
-### [babel-core](./babel-cli.md)
+### [babel-cli](./babel-cli.md)
 
 ### [babel-external-helpers](./babel-external-helpers.md)
 
