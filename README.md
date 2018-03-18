@@ -43,7 +43,7 @@
 
 # Babel
 
-### [Babel知识梳理](./babel/doc/doc.md)
+### [Babel知识梳理](https://github.com/joeny3154/daily-notes/babel/doc/doc.md)
 
 - babel-core
 
@@ -79,19 +79,19 @@
 
 # Node
 
-- [node版本管理器](./nodeJs/nvm_node版本管理器.md)
+- [node版本管理器](https://github.com/joeny3154/daily-notes/nodeJs/nvm_node版本管理器.md)
 
-- [nrm使用](./nodeJs/npm/nrm使用.md)
+- [nrm使用](https://github.com/joeny3154/daily-notes/nodeJs/npm/nrm使用.md)
 
-- [书写一个npm包并发布](./nodeJs/npm/书写一个npm包并发布.md))
+- [书写一个npm包并发布](https://github.com/joeny3154/daily-notes/nodeJs/npm/书写一个npm包并发布.md)
 
-- [package-lock](./nodeJs/npm/package-lock.json.md)
+- [package-lock](https://github.com/joeny3154/daily-notes/nodeJs/npm/package-lock.json.md)
 
 # jQuery
 
-- [编写jQuery插件](./jQuery/手写jQuery插件.md)
+- [编写jQuery插件](https://github.com/joeny3154/daily-notes/jQuery/手写jQuery插件.md)
 
-- [jquery vs 原生获取各种尺寸、位置](./jQuery/jquery&原生获取各种尺寸位置.md.md)
+- [jquery vs 原生获取各种尺寸、位置](https://github.com/joeny3154/daily-notes/jQuery/jquery&原生获取各种尺寸位置.md.md)
 
 # Drafts
 
