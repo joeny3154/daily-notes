@@ -91,7 +91,7 @@
 
 - [编写jQuery插件](https://github.com/joeny3154/daily-notes/blob/master/jQuery/手写jQuery插件.md)
 
-- [jquery vs 原生获取各种尺寸、位置](https://github.com/joeny3154/daily-notes/blob/master/jQuery/jquery&原生获取各种尺寸位置.md.md)
+- [jquery vs 原生获取各种尺寸、位置](https://github.com/joeny3154/daily-notes/blob/master/jQuery/jquery_原生获取各种尺寸位置.md.md)
 
 # Drafts
 
