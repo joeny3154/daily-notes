@@ -12,6 +12,6 @@ Preventing Transitions
 
 eg:
 
-```
+``` js
 <Prompt when={this.state.isBlocking} message={location => (`Are you sure you want to go to ${location.pathname}`)}/>
 ```

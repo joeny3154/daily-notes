@@ -4,12 +4,9 @@
 ====
 
 
-
-
-
 eg: `<Redirect from="/old-match" to="/will-match"/>`
 
-```
+``` js
 import {
   BrowserRouter as Router,
   Route,
@@ -17,6 +14,5 @@ import {
   Redirect,
   withRouter
 } from 'react-router-dom'
-
 
 ```

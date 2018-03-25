@@ -6,6 +6,7 @@ Getter
 
 `Getter` 有第两个参数, `state`, `getters`（其他 getter）
 
+``` js
 const store = new Vuex.Store({
   state: {
     todos: [
@@ -22,10 +23,11 @@ const store = new Vuex.Store({
     }
   }
 })
+```
 
 **可以通过让 getter 返回一个函数，来实现给 getter 传参。**
 
-```
+``` js
 getters: {
   // ...
   getTodoById: (state) => (id) => {
@@ -37,7 +39,7 @@ store.getters.getTodoById(2) // -> { id: 2, text: '...', done: false }
 
 # mapGetters 辅助函数
 
-
+``` js
 import { mapGetters } from 'vuex'
 
 export default {
@@ -53,3 +55,4 @@ export default {
     ])
   }
 }
+```

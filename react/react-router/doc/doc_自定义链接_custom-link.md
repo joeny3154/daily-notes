@@ -7,7 +7,7 @@ custom link 自定义链接
 
 自定义传递的props供内部的 `<Route/>` 使用，eg: ` <OldSchoolMenuLink activeOnlyWhenExact={true} to="/" label="Home"/>`
 
-```
+``` js
 import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 

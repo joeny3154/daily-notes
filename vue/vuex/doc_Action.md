@@ -15,7 +15,7 @@ Action 函数接受一个与 store 实例具有相同方法和属性的 `context
 
 eg:
 
-```
+``` js
 const store = new Vuex.Store({
   state: {
     count: 0

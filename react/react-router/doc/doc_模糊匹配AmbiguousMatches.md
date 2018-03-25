@@ -12,7 +12,7 @@ React Router 让你在多个地方匹配目的（侧边栏，面包屑等）。
 所以，当你要清除任何模糊的匹配，而不匹配“/about”改为“/：user”，只需将<Route>包装在一个<Switch>。 **它将呈现第一个匹配**。
 
 
-```
+``` js
 import React from 'react'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
