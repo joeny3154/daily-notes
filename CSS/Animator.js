@@ -5,6 +5,17 @@ function Animator(duration, update, easing){
   this.easing = easing;
 }
 
+if(typeof global.requestAnimationFrame === 'undefined'){
+  global.requestAnimationFrame = function(callback){
+    return setTimeout(function(){ //polyfill
+      callback.call(this, nowtime());
+    }, 1000/60);
+  }
+  global.cancelAnimationFrame = function(qId){
+    return clearTimeout(qId);
+  }
+}
+
 Animator.prototype = {
 
   animate: function(){

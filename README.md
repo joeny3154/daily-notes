@@ -38,30 +38,7 @@
 
 - 可视化分析包的尺寸
 
-
 ### [vue-cli配置详解](https://github.com/joeny3154/vue-cli-webpack-comments/blob/master/README.md)
-
-# Babel
-
-### [Babel知识梳理](https://github.com/joeny3154/daily-notes/blob/master/babel/doc/doc.md)
-
-- babel-core
-
-- babel-cli
-
-- babel-external-helpers
-
-- babel-node
-
-- babel-register
-
-- babel-runtime
-
-- babel-polyfill
-
-- babel-preset-env
-
-- transform-runtime对比babel-polyfill
 
 # React
 
@@ -108,6 +85,28 @@
 - redux配置
 
 ### [React组件懒加载](https://github.com/joeny3154/react-lazilyload)
+
+# Babel
+
+### [Babel知识梳理](https://github.com/joeny3154/daily-notes/blob/master/babel/doc/doc.md)
+
+- babel-core
+
+- babel-cli
+
+- babel-external-helpers
+
+- babel-node
+
+- babel-register
+
+- babel-runtime
+
+- babel-polyfill
+
+- babel-preset-env
+
+- transform-runtime对比babel-polyfill
 
 # Node
 

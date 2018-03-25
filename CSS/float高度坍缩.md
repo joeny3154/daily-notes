@@ -28,17 +28,23 @@ eg:
 
 4. 给父级容器加一个 `class="clearfix"`
 
-```
+``` css
+.clearfix {
+  /* 触发 hasLayout */ 
+  zoom: 1; 
+}
 .clearfix::after {
-  content:"clear";
+  content:"";
   display:block;
   clear:both; 
-  line-height:0;
   height:0;
   visibility:hidden;
-  zoom:1;
 }
 ```
+
+layout是windows IE的一个私有概念，它决定了元素如何对其内容定位和尺寸计算，以及与其他元素的关系和相互作用。当一个元素“拥有布局”时，它会负责本身及其子元素的尺寸和定位。而如果一个元素“没有拥有布局”，那么它的尺寸和位置由最近的拥有布局的祖先元素控制。
+
+必须说明的是，IE8及以上浏览器使用了全新的显示引擎，已经不在使用haslayout属性，因此文中提到的haslayout属性只针对IE6和IE7。
 
 1. `display:block` 使生成的元素以块级元素显示,占满剩余空间;
 
