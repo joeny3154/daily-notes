@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var a = {}
+    var b = {}
+    var log = console.log;
+    [] ? log(true) : log(false) // true
+    NaN == NaN ? log(true) : log(false) // false
+    '0' ? log(true) : log(false) // ture
+    log(typeof []) // object
+    log(typeof {}.a) // undefined
+
+    var [a, [b = 1], c] = [1, [null]] 
+    console.log(a, b, c) // 1 null undefined
+
+    // var object = {}
+    // var object = {
+    //   a: 'a',
+    //   foo: function () {
+    //     console.log(this.a)
+    //   }
+    // }
+    // var foo = function () {
+    //   console.log(this.a)
+    //   this.a = '1'
+    // }
+    // foo()
+    // object.foo()
+    // foo.call(object)
+    // console.log(window.a)
+
+    // var array = [0, 1, 2]
+    // delete array[1]
+    // console.log(array)
+    // console.log(array[1])
+
+    // var data = [1, '2', true, null, {a: 'a', b: undefined}, foo]
+    // console.log(JSON.stringify(data))
+  </script>
+</body>
+</html>
