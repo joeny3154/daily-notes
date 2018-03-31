@@ -11,11 +11,11 @@ this.setState
 
 要修复它，请使用第二种形式的 setState() 来接受一个函数而不是一个对象。 该函数将接收先前的状态作为第一个参数，将此次更新被应用时的props做为第二个参数：
 
-
+``` js
 this.setState((prevState, props) => ({
   counter: prevState.counter + props.increment
 }));
-
+```
 
 # 事件
 
@@ -51,7 +51,8 @@ React 中稍稍有点不同：
 - 传参：
 
 方式1：
-<button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
+
+`<button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>`
 
 方式2：
 通过 bind 方式向监听函数传参，在类组件中定义的监听函数，事件对象 e 要排在所传递参数的后面

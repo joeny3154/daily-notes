@@ -52,6 +52,8 @@ x5-video-player-type="h5"属性，腾讯x5内核系的android微信和手Q内置
 
 # 自动播放
 
+https://github.com/congtou221/blog/issues/18
+
 android始终不能自动播放，不多说。值得一提的是经测现在ios10后版本的safari和微信都不让视频自动播放了（顺带音频也不能自动播放了），但微信提供了一个事件WeixinJSBridgeReady，在微信嵌入webview全局的这个事件触发后，视频仍可以自动播放，这个应该是现在在ios端微信的视频自动播放的比较靠谱的方式，其他如手q或者其他浏览器，建议就引导用户出发触屏的行为操作出发比较好。
 
 ``` js
