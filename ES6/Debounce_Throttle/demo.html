@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="input">
+  <script>
+    function debounce (fn, delay) {
+      var timer;
+
+      return function () {
+        var context = this
+        var args = arguments
+        console.log(args)
+        clearTimeout(timer)
+
+        timer = setTimeout(function () {
+          fn.apply(context, args)
+        }, delay)
+      }
+    }
+
+    function throttle (fn, threshhold) {
+      var timer, last;
+      return function () {
+        var now = +new Date(), context = this, args = arguments
+        if (last && now < last + threshhold) {
+          clearTimeout(timer)
+          timer = setTimeout(function () {
+            last = now
+            fn.apply(context, args)
+          }, threshhold)
+        } else {
+          last = +new Date()
+          fn.apply(context, args)
+        }
+      }
+    }
+    var input = document.getElementById('input')
+    input.addEventListener('input', debounce(() => console.log(1), 1000), false)
+    document.addEventListener('mousemove', throttle(() => console.log(2), 500), false)
+  </script>
+</body>
+</html>
