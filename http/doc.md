@@ -32,8 +32,6 @@
 
 - `User-Agent`： 发送请求的应用程序名称 `User-Agent: Mozilla/5.0 (Linux; X11)`
 
-- `Host`	指定请求的服务器的域名和端口号	Host: www.zcmhi.com
-
 - `Connection`： 指定与连接相关的属性，如`Connection: Keep-Alive`
 
 - `Authorization`	HTTP授权的授权证书	`Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==`
