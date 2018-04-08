@@ -1,9 +1,12 @@
 预读取 DNS
 ===
+
 ``` html
 <meta http-equiv="x-dns-prefetch-control" content="on" />
 <link rel="dns-prefetch" href="http://bdimg.share.baidu.com" />
 ```
+
+DNS: 域名系统
 
 `X-DNS-Prefetch-Control` 头控制着浏览器的 DNS 预读取功能。 DNS 预读取是一项使浏览器主动去执行域名解析的功能，其范围包括文档的所有链接，无论是图片的，CSS 的，还是 JavaScript 等其他用户能够点击的 URL。
 
