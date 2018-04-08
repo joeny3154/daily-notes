@@ -8,7 +8,7 @@
 
 eg:
 
-```
+``` js
 /world$/.test('hello world\n') // false
 /world$/m.test('hello world\n') // true
 ```
@@ -17,7 +17,7 @@ eg:
 
 eg:
 
-```
+``` js
 /^b/m.test('a\nb') // true
 ```
 
