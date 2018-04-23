@@ -10,7 +10,7 @@ Mutation 必须是同步函数
 
 eg: 提交载荷（Payload）
 
-```
+``` js
 mutations: {
   increment (state, payload) {
     state.count += payload.amount
@@ -56,7 +56,7 @@ export default {
 
 eg:
 
-```
+``` js
 // mutation-types.js
 export const SOME_MUTATION = 'SOME_MUTATION'
 
