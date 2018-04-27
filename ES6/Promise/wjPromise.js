@@ -84,19 +84,18 @@ function Promise (fn) {
   this._state = 'pending'
   this._value = null
   this._deferreds = []
-  var self = this
   // 立即执行
   try {
     fn(
       function (value) {
-        return resolve(self, value)
-      },
+        return resolve(this, value)
+      }.bind(this),
       function (value) {
-        return reject(self, value)
-      }
+        return reject(this, value)
+      }.bind(this)
     )
   } catch (e) {
-    reject(self, e)
+    reject(this, e)
   }
   
 }
@@ -144,5 +143,41 @@ function handleResolved (promise, deferred) {
 }
 
 
+Promise.reject = function (value) {
+  return new Promise(function (resolve, reject) {
+    reject(value)
+  })
+}
+
+function valuePromise (value) {
+  var promise =  new Promise(function () {})
+  promise._state = 'fulfilled'
+  promise._value = value
+  return promise
+}
+Promise.resolve = function (value) {
+  if (value instanceof Promise) return value
+
+  if (value === undefined) return valuePromise(undefined)
+  if (value === null) return valuePromise(null)
+  if (value === 0) return valuePromise(0)
+  if (value === '') return valuePromise('')
+  if (value === true) return valuePromise(true)
+  if (value === false) return valuePromise(false)
+
+  if (typeof value === 'object' || typeof value === 'function') {
+    try {
+      var then = value.then
+      if (typeof then === 'function') {
+        return new Promise(then.)
+      }
+    } catch (e) {
+      return new Promise(function (resolve, reject) {
+        reject(e)
+      })
+    }
+  }
+  return valuePromise(value)
+}
 
 module.exports = Promise

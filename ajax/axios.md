@@ -64,9 +64,21 @@ axios.get('/user/12345', {
 });
 // cancel the request (the message parameter is optional)
 source.cancel('Operation canceled by the user.');
-
 ```
 
+
+``` js
+function createCancelToken () {
+  const CancelToken = axios.CancelToken
+  return CancelToken.source()
+}
+const source = createCancelToken()
+
+request.getDbHistoryDetail({ actionSid: sid }, { cancelToken: source.token }).then(({ data }) => {}）
+
+this.cancelDetail = source
+this.cancelDetail.cancel('Operation canceled by the user.');
+```
 - 请求拦截
 
 比如：发送登录请求，接收请求前加一个单独的loading动画

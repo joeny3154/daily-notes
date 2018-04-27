@@ -1,7 +1,7 @@
-var Promise = require('./wjPromise.js')
+var MyPromise = require('./wjPromise.js')
 
 function p1 () {
-  return new Promise(function (resolve, reject) {
+  return new MyPromise(function (resolve, reject) {
     setTimeout(function () {
       resolve('p1')
     }, 1000)
