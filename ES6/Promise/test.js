@@ -1,33 +1,17 @@
-var MyPromise = require('./wjPromise.js')
+// var MyPromise = require('./wjPromise.js')
+var MyPromise = require('./core.js')
 
-function p1 () {
-  return new MyPromise(function (resolve, reject) {
-    setTimeout(function () {
-      resolve('p1')
-    }, 1000)
-  })
-}
+var a = 1
+var promise = new MyPromise((resolve) => {
+    // resolve('...')
+      
+})
 
-function test () {
-  return new Promise(function (resolve, reject) {
-    setTimeout(function () {
-      resolve(100)
-    }, 1000)
-  })
-}
-
-
-
-test()
-  .then(function (value) {
-    console.log('value1', value)
-    return p1()
-  })
-  .then()
-  .then(function (value) {
-    console.log('value2', value)
-    throw new Error('error')
-  })
-  .catch(function (err) {
-    console.log('err', err)
-  })
+promise.then(function (value) {
+  a = 2
+})
+console.log(a)
+// test()
+// .then(function (value) {
+//   console.log('test0 then', value)
+// })

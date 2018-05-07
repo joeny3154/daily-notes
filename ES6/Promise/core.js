@@ -1,11 +1,8 @@
-
-
-https://github.com/then/promise/blob/01cf802ed397d45cd959968e90792049a08b9db4/src/core.js
-
-``` js
 'use strict';
 
-var asap = require('asap/raw');
+// var asap = require('asap/raw');
+
+// var asap = setTimeout
 
 function noop() {}
 
@@ -14,27 +11,20 @@ function noop() {}
 // 0 - pending
 // 1 - fulfilled with _value
 // 2 - rejected with _value
-// 3 - adopted the state of another promise, _value； 采用另一个primose的状态
+// 3 - adopted the state of another promise, _value
 //
 // once the state is no longer pending (0) it is immutable
-// 一旦状态不再为pending（0），它是不可变的
-
 
 // All `_` prefixed properties will be reduced to `_{random number}`
 // at build time to obfuscate them and discourage their use.
 // We don't use symbols or Object.defineProperty to fully hide them
 // because the performance isn't good enough.
 
-// 所有`_`前缀的属性将被缩减为`_ {random number}` 在构建时混淆它们并阻止它们的使用。
-// 我们不使用symbols或Object.defineProperty来完全隐藏它们，因为表现不够好。
 
 // to avoid using try/catch inside critical functions, we
 // extract them to here.
-// 为了避免在关键函数中使用try / catch，我们将它们提取到这里。
-
 var LAST_ERROR = null;
 var IS_ERROR = {};
-// 获取zhen方法
 function getThen(obj) {
   try {
     return obj.then;
@@ -52,7 +42,6 @@ function tryCallOne(fn, a) {
     return IS_ERROR;
   }
 }
-// fn(resolve, reject)
 function tryCallTwo(fn, a, b) {
   try {
     fn(a, b);
@@ -71,13 +60,11 @@ function Promise(fn) {
   if (typeof fn !== 'function') {
     throw new TypeError('Promise constructor\'s argument is not a function');
   }
-  // 延迟对象的状态
   this._deferredState = 0;
   this._state = 0;
   this._value = null;
   this._deferreds = null;
   if (fn === noop) return;
-  // 立即执行fn，并保证 onFulfilled onRejected
   doResolve(fn, this);
 }
 Promise._onHandle = null;
@@ -100,16 +87,13 @@ function safeThen(self, onFulfilled, onRejected) {
     handle(self, new Handler(onFulfilled, onRejected, res));
   });
 }
-
 function handle(self, deferred) {
   while (self._state === 3) {
     self = self._value;
   }
-  // 此处为null，暂不考虑
   if (Promise._onHandle) {
     Promise._onHandle(self);
   }
-  // 2.3.3.1 如果x是pending状态，promise必须保持pending走到x fulfilled或rejected.
   if (self._state === 0) {
     if (self._deferredState === 0) {
       self._deferredState = 1;
@@ -146,10 +130,8 @@ function handleResolved(self, deferred) {
     }
   });
 }
-// promise 解析过程
 function resolve(self, newValue) {
   // Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
-  // 2.2.1 如果promise 和 x 指向相同的值, 使用 TypeError做为原因将promise拒绝
   if (newValue === self) {
     return reject(
       self,
@@ -164,50 +146,37 @@ function resolve(self, newValue) {
     if (then === IS_ERROR) {
       return reject(self, LAST_ERROR);
     }
-    // 2.2.2 如果 x/newValue 是一个promise, 采用其状态
     if (
       then === self.then &&
       newValue instanceof Promise
     ) {
       self._state = 3;
       self._value = newValue;
-      // fn => promise
-      // handle => 
       finale(self);
       return;
-    }
-    // 2.2.3 如果x是一个对象或一个函数
-    // 如果 then 是一个函数， 以x为this调用then函数， 且第一个参数是resolvePromise，第二个参数是rejectPromise
-    else if (typeof then === 'function') {
-      // 执行then, doResolve(fn, promise）
+    } else if (typeof then === 'function') {
       doResolve(then.bind(newValue), self);
       return;
     }
   }
   self._state = 1;
   self._value = newValue;
-  // 执行_deferreds，因为可能后续因为接了多个then，使得_deferreds挂载了多个deferred，统一通过finale方法执行
   finale(self);
 }
 
 function reject(self, newValue) {
   self._state = 2;
   self._value = newValue;
-  // _onReject 为null，暂不考虑
   if (Promise._onReject) {
     Promise._onReject(self, newValue);
   }
   finale(self);
 }
-// 处理
-// 如果_state = 3 时，根据_deferredState状态执行_deferreds
 function finale(self) {
-  // then => handle(self, deferred) 
   if (self._deferredState === 1) {
     handle(self, self._deferreds);
     self._deferreds = null;
   }
-  // 
   if (self._deferredState === 2) {
     for (var i = 0; i < self._deferreds.length; i++) {
       handle(self, self._deferreds[i]);
@@ -228,9 +197,6 @@ function Handler(onFulfilled, onRejected, promise){
  *
  * Makes no guarantees about asynchrony.
  */
-
-// 采取一个潜在的行为不当的解析器功能，并确保onFulfilled和onRejected仅调用一次。并保证只执行其一。
-
 function doResolve(fn, promise) {
   var done = false;
   var res = tryCallTwo(fn, function (value) {
@@ -247,4 +213,3 @@ function doResolve(fn, promise) {
     reject(promise, LAST_ERROR);
   }
 }
-```

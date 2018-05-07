@@ -25,6 +25,7 @@ function resolve (promise, newValue) {
     var deferreds = promise._deferreds
     if (newValue._state === 'pending') {
       newValue._deferreds.push(...deferreds)
+      console.log('newValue._deferreds', newValue._deferreds.length)
     } else {
       if (deferreds.length !== 0) {
         for(var i = 0; i < deferreds.length; i ++) {
@@ -155,29 +156,29 @@ function valuePromise (value) {
   promise._value = value
   return promise
 }
-Promise.resolve = function (value) {
-  if (value instanceof Promise) return value
+// Promise.resolve = function (value) {
+//   if (value instanceof Promise) return value
 
-  if (value === undefined) return valuePromise(undefined)
-  if (value === null) return valuePromise(null)
-  if (value === 0) return valuePromise(0)
-  if (value === '') return valuePromise('')
-  if (value === true) return valuePromise(true)
-  if (value === false) return valuePromise(false)
+//   if (value === undefined) return valuePromise(undefined)
+//   if (value === null) return valuePromise(null)
+//   if (value === 0) return valuePromise(0)
+//   if (value === '') return valuePromise('')
+//   if (value === true) return valuePromise(true)
+//   if (value === false) return valuePromise(false)
 
-  if (typeof value === 'object' || typeof value === 'function') {
-    try {
-      var then = value.then
-      if (typeof then === 'function') {
-        return new Promise(then.)
-      }
-    } catch (e) {
-      return new Promise(function (resolve, reject) {
-        reject(e)
-      })
-    }
-  }
-  return valuePromise(value)
-}
+//   if (typeof value === 'object' || typeof value === 'function') {
+//     try {
+//       var then = value.then
+//       if (typeof then === 'function') {
+//         return new Promise(then.)
+//       }
+//     } catch (e) {
+//       return new Promise(function (resolve, reject) {
+//         reject(e)
+//       })
+//     }
+//   }
+//   return valuePromise(value)
+// }
 
 module.exports = Promise
