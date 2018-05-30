@@ -25,6 +25,13 @@ git remote -v
 git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
 ```
 
+如果已经存在，需要先删除：
+
+```
+$ git remote rm upstream
+$ git remote add upstream https://github.com/Foo/repos.git
+```
+
 - 再次查看状态确认是否配置成功
 
 ``` shell
