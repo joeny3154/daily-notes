@@ -1,0 +1,7 @@
+
+
+- addClass
+
+- removeClass
+
+- getStyle

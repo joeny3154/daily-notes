@@ -1,3 +1,7 @@
+
+vim命令
+====
+
 [viw常用](http://pizn.github.io/2012/03/03/vim-commonly-used-command.html)
 
 强制退出
